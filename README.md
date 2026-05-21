@@ -1,4 +1,4 @@
-# 🚀 ELON DOGE MINING SAAS PLATFORM
+# 🚀 OFFICIAL ELON DOGE MINING SAAS PLATFORM
 
 A production-ready **AI-powered SaaS dashboard platform** built with Next.js 14.
 
@@ -7,13 +7,13 @@ This system is designed as a **scalable analytics + simulation SaaS application*
 ---
 
 ## 🌐 Live Demo
-https://your-deployed-url.com
+https://officialelondogemining.com
 
 ---
 
 ## 🧠 Overview
 
-ELON DOGE MINING SAAS PLATFORM is a modern SaaS dashboard system that provides:
+OFFICIAL ELON DOGE MINING SAAS PLATFORM is a modern SaaS dashboard system that provides:
 
 - AI-powered assistant for user guidance
 - Real-time analytics dashboard simulation
@@ -313,11 +313,11 @@ setInterval(() => {
 
 
 
-BINANCE_PAY_API_KEY=YOUR_NEW_API_KEY
-BINANCE_PAY_SECRET_KEY=YOUR_NEW_SECRET_KEY
-BINANCE_PAY_MERCHANT_ID=YOUR_MERCHANT_ID
+BINANCE_PAY_MERCHANT_ID=726040643
+BINANCE_PAY_API_KEY=og59tado16pdeuqllafjc2t6a9dzewgmg7b84b7qcvnagnfgqa8d7suieh9hn7v1
+
 STRIPE_SECRET_KEY=YOUR_STRIPE_KEY
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+NEXT_PUBLIC_SITE_URL=https://officialelondogemining.lives
 
 
 
