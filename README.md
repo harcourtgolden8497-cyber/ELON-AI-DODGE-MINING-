@@ -391,3 +391,7 @@ vercel deploy
 
 npm run build
 netlify deploy
+
+package.json
+src/
+public/
