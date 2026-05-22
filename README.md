@@ -114,6 +114,15 @@ npm start
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 elon-doge-mining/
+/my-saas-app
+ ├── /public
+ ├── /src
+ ├── /netlify
+ │    └── /functions   (serverless backend)
+ ├── netlify.toml
+ ├── package.json
+ ├── .env.example
+ └── README.md
 │
 ├── app/
 │   ├── page.tsx
@@ -314,7 +323,7 @@ setInterval(() => {
 
 
 BINANCE_PAY_MERCHANT_ID=726040643
-BINANCE_PAY_API_KEY=og59tado16pdeuqllafjc2t6a9dzewgmg7b84b7qcvnagnfgqa8d7suieh9hn7v1
+BINANCE_PAY_API_KEY=
 
 STRIPE_SECRET_KEY=YOUR_STRIPE_KEY
 NEXT_PUBLIC_SITE_URL=https://officialelondogemining.lives
