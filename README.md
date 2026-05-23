@@ -865,6 +865,12 @@ npm install
 npm run build
 vercel deploy
 
+[build]
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+npm install @netlify/plugin-nextjs
 /app/page.tsx
 /pages/index.js
 
