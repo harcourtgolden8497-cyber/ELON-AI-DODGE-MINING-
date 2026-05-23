@@ -877,6 +877,8 @@ npm install @netlify/plugin-nextjs
 npm run build
 netlify deploy
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/202f21a2-e7b8-4457-88fa-e7a45ff7f6bc/deploy-status)](https://app.netlify.com/projects/officialelondogeminings/deploys)
+
 package.json
 src/
 public/
