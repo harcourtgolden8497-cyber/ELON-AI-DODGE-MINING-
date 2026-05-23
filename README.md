@@ -7,7 +7,7 @@ This system is designed as a **scalable analytics + simulation SaaS application*
 ---
 
 ## 🌐 Live Demo
-https://officialelondogemining.com
+https://officialelondogemining.live
 
 ---
 
@@ -786,7 +786,7 @@ setInterval(() => {
 
 
 BINANCE_PAY_MERCHANT_ID=726040643
-BINANCE_PAY_API_KEY=
+BINANCE_PAY_API_KEY=1hc6kgztgzbhebkpwkgvvukrhbfhcuhcy16b5feuuj3mccsdbhmalj2qv29p30ek
 
 STRIPE_SECRET_KEY=YOUR_STRIPE_KEY
 NEXT_PUBLIC_SITE_URL=https://officialelondogemining.lives
@@ -854,7 +854,12 @@ create table transactions (
   tx_hash text,
   created_at timestamp
 );
-
+git init
+git add .
+git commit -m "Production SaaS setup"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git push -u origin main
 
 npm install
 npm run build
