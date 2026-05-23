@@ -865,6 +865,8 @@ npm install
 npm run build
 vercel deploy
 
+/app/page.tsx
+/pages/index.js
 
 npm run build
 netlify deploy
