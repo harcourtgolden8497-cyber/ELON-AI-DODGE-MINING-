@@ -1,4 +1,7 @@
-github/workflows/azure-webapps-node.yml
+on:
+  push:
+    paths-ignore:
+      - README.md
 #index.html (required)
 CSS/JS/image files
 # This workflow assumes you have already created the target Azure App Service web app.
