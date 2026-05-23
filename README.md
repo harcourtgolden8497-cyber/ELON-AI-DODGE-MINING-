@@ -930,13 +930,18 @@ jobs:
       with:
         name: node-app
 
-    - name: 'Deploy to Azure WebApp'
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+    - .github/workflows/azure-webapps-node.yml
+on:
+  push:
+    branches:
+      - main
+# on:
+#   push:
+#     branches:
+#       - main
+on: workflow_dispatch
+azure-webapps-node.yml → azure-webapps-node.disabled
+.github/workflows/azure-webapps-node.yml
 
 package.json
 src/
