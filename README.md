@@ -1031,3 +1031,76 @@ DATABASE_URL="postgresql://postgres.ulafajakyuguntbytdui:[YOUR-PASSWORD]@aws-1-u
 
 # Direct connection to the database. Used for migrations
 DIRECT_URL="postgresql://postgres.ulafajakyuguntbytdui:[YOUR-PASSWORD]@aws-1-us-west-2.pooler.supabase.com:5432/postgres"
+npm install prisma --save-dev
+npx prisma init
+# Connect to Supabase via connection pooling
+DATABASE_URL="postgresql://postgres.ulafajakyuguntbytdui:[YOUR-PASSWORD]@aws-1-us-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+
+# Direct connection to the database. Used for migrations
+DIRECT_URL="postgresql://postgres.ulafajakyuguntbytdui:[YOUR-PASSWORD]@aws-1-us-west-2.pooler.supabase.com:5432/postgres"
+
+
+
+
+npx create-next-app@latest
+npm install @supabase/supabase-js @supabase/ssr
+NEXT_PUBLIC_SUPABASE_URL=your-url-here
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-key-here
+import { createBrowserClient } from '@supabase/supabase-js';
+
+export const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+
+export function createClient() {
+  const cookieStore = cookies();
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+      },
+    }
+  );
+}
+import { createBrowserClient } from '@supabase/supabase-js';
+
+export const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+
+export function createClient() {
+  const cookieStore = cookies();
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+      },
+    }
+  );
+}
+import { createClient } from '@/lib/supabase/server';
+
+export default async function Page() {
+  const supabase = createClient();
+
+  const { data } = await supabase.from('users').select('*');
+
+  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+}
+npm run dev
