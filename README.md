@@ -1130,3 +1130,4 @@ brew install supabase/tap/supabase
 supabase init
 docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1' local-network
 npx supabase start --network-id local-network
+https://ulafajakyuguntbytdui.supabase.co/mining_sessions
