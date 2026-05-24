@@ -1132,3 +1132,4 @@ docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1'
 npx supabase start --network-id local-network
 https://ulafajakyuguntbytdui.supabase.co/mining_sessions
 https://ulafajakyuguntbytdui.supabase.co/wallets
+https://ulafajakyuguntbytdui.supabase.co/mining_sessions
