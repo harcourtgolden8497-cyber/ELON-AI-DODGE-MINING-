@@ -1110,3 +1110,8 @@ npm run dev
     email: 'example@email.com',
     password: 'example-password',
   })
+npm install supabase --save-dev
+npx supabase init
+npx supabase start
+docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1' local-network
+npx supabase start --network-id local-network
