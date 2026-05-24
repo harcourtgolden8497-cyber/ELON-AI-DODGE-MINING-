@@ -788,7 +788,7 @@ setInterval(() => {
 BINANCE_PAY_MERCHANT_ID=726040643
 BINANCE_PAY_API_KEY=1hc6kgztgzbhebkpwkgvvukrhbfhcuhcy16b5feuuj3mccsdbhmalj2qv29p30ek
 
-STRIPE_SECRET_KEY=YOUR_STRIPE_KEY
+BINANCE_PAY_API_KEY=1hc6kgztgzbhebkpwkgvvukrhbfhcuhcy16b5feuuj3mccsdbhmalj2qv29p30ek
 NEXT_PUBLIC_SITE_URL=https://officialelondogemining.lives
 
 
@@ -950,3 +950,77 @@ npm install @supabase/supabase-js @supabase/ssr
 npx shadcn@latest add @supabase/supabase-client-nextjs
 NEXT_PUBLIC_SUPABASE_URL=https://ulafajakyuguntbytdui.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_G_z62836e2EXYJkOgCa5Zg_pvGt8GTP
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+
+export function createClient() {
+  const cookieStore = cookies();
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_G_z62836e2EXYJkOgCa5Zg_pvGt8GTP
+!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+      },
+    }
+  );
+}
+import { createClient } from '@/lib/supabase/server';
+
+export default async function Page() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('users')
+    .select('*');
+
+  return (
+    <pre>{JSON.stringify(data, null, 2)}</pre>
+  );
+}
+import { createBrowserClient } from '@supabase/supabase-js';
+
+export const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL=https://ulafajakyuguntbytdui.supabase.co!,
+  https://ulafajakyuguntbytdui.supabase.co!
+);
+'use client';
+
+import { supabase } from '@/lib/supabase/client';
+import { useState } from 'react';
+
+export default function AddUser() {
+  const [email, setEmail] = useState('');
+
+  async function addUser() {
+    const { data, error } = await supabase
+      .from('users')
+      .insert({ email });
+
+    console.log(data, error);
+  }
+
+  return (
+    <div>
+      <input 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter email"
+      />
+      <button onClick={addUser}>Add User</button>
+    </div>
+  );
+}
+NEXT_PUBLIC_SUPABASE_URL=https://ulafajakyuguntbytdui.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_G_z62836e2EXYJkOgCa5Zg_pvGt8GTP
+import { createBrowserClient } from '@supabase/supabase-js';
+
+export const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
+NEXT_PUBLIC_SUPABASE_URL=https://ulafajakyuguntbytdui.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
