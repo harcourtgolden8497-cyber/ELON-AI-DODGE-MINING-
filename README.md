@@ -1115,3 +1115,18 @@ npx supabase init
 npx supabase start
 docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1' local-network
 npx supabase start --network-id local-network
+NODE_OPTIONS=--no-experimental-fetch yarn add supabase --dev
+yarn supabase init
+yarn supabase start
+docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1' local-network
+npx supabase start --network-id local-network
+pnpm add supabase --save-dev --allow-build=supabase
+--allow-build=supabase
+pnpx supabase init
+pnpx supabase start
+docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1' local-network
+npx supabase start --network-id local-network
+brew install supabase/tap/supabase
+supabase init
+docker network create -o 'com.docker.network.bridge.host_binding_ipv4=127.0.0.1' local-network
+npx supabase start --network-id local-network
