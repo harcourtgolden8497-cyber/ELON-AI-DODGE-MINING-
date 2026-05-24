@@ -946,3 +946,7 @@ azure-webapps-node.yml → azure-webapps-node.disabled
 package.json
 src/
 public/
+npm install @supabase/supabase-js @supabase/ssr
+npx shadcn@latest add @supabase/supabase-client-nextjs
+NEXT_PUBLIC_SUPABASE_URL=https://ulafajakyuguntbytdui.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_G_z62836e2EXYJkOgCa5Zg_pvGt8GTP
