@@ -1104,3 +1104,9 @@ export default async function Page() {
   return <pre>{JSON.stringify(data, null, 2)}</pre>;
 }
 npm run dev
+
+  // Sign up with email
+  const { user, error } = await supabase.auth.signUp({
+    email: 'example@email.com',
+    password: 'example-password',
+  })
