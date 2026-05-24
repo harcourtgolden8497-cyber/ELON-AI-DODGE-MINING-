@@ -1133,3 +1133,233 @@ npx supabase start --network-id local-network
 https://ulafajakyuguntbytdui.supabase.co/mining_sessions
 https://ulafajakyuguntbytdui.supabase.co/wallets
 https://ulafajakyuguntbytdui.supabase.co/mining_sessions
+GRANT SELECT ON <schema_name>.<table_name> TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON <schema_name>.<table_name> TO authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON <schema_name>.<table_name> TO service_role;
+alter table <schema_name>.<table_name>
+enable row level security;
+create policy "Individuals can view their own todos."
+on todos for select
+using ( (select auth.uid()) = user_id );
+select *
+from todos
+where auth.uid() = todos.user_id;
+-- Policy is implicitly added.
+alter table "table_name" enable row level security;
+CREATE OR REPLACE FUNCTION rls_auto_enable()
+RETURNS EVENT_TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = pg_catalog
+AS $$
+DECLARE
+  cmd record;
+BEGIN
+  FOR cmd IN
+    SELECT *
+    FROM pg_event_trigger_ddl_commands()
+    WHERE command_tag IN ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')
+      AND object_type IN ('table','partitioned table')
+  LOOP
+     IF cmd.schema_name IS NOT NULL AND cmd.schema_name IN ('public') AND cmd.schema_name NOT IN ('pg_catalog','information_schema') AND cmd.schema_name NOT LIKE 'pg_toast%' AND cmd.schema_name NOT LIKE 'pg_temp%' THEN
+      BEGIN
+        EXECUTE format('alter table if exists %s enable row level security', cmd.object_identity);
+        RAISE LOG 'rls_auto_enable: enabled RLS on %', cmd.object_identity;
+      EXCEPTION
+        WHEN OTHERS THEN
+          RAISE LOG 'rls_auto_enable: failed to enable RLS on %', cmd.object_identity;
+      END;
+     ELSE
+        RAISE LOG 'rls_auto_enable: skip % (either system schema or not in enforced list: %.)', cmd.object_identity, cmd.schema_name;
+     END IF;
+  END LOOP;
+END;
+$$;
+DROP EVENT TRIGGER IF EXISTS ensure_rls;
+CREATE EVENT TRIGGER ensure_rls
+ON ddl_command_end
+WHEN TAG IN ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')
+EXECUTE FUNCTION rls_auto_enable();
+USING (auth.uid() = user_id)
+null = user_id
+USING (auth.uid() IS NOT NULL AND auth.uid() = user_id)
+create policy "Profiles are viewable by everyone"
+on profiles for select
+to authenticated, anon
+using ( true );
+-- OR
+create policy "Public profiles are viewable only by authenticated users"
+on profiles for select
+to authenticated
+using ( true );
+-- 1. Create table
+create table profiles (
+  id uuid primary key,
+  user_id uuid references auth.users,
+  avatar_url text
+);
+-- 2. Enable RLS
+alter table profiles enable row level security;
+-- 3. Create Policy
+create policy "Public profiles are visible to everyone."
+on profiles for select
+to anon         -- the Postgres Role (recommended)
+using ( true ); -- the actual Policy
+create policy "User can see their own profile only."
+on profiles
+for select using ( (select auth.uid()) = user_id );
+-- 1. Create table
+create table profiles (
+  id uuid primary key,
+  user_id uuid references auth.users,
+  avatar_url text
+);
+-- 2. Enable RLS
+alter table profiles enable row level security;
+-- 3. Create Policy
+create policy "Users can create a profile."
+on profiles for insert
+to authenticated                          -- the Postgres Role (recommended)
+with check ( (select auth.uid()) = user_id );      -- the actual Policy
+-- 1. Create table
+create table profiles (
+  id uuid primary key,
+  user_id uuid references auth.users,
+  avatar_url text
+);
+
+-- 2. Enable RLS
+alter table profiles enable row level security;
+
+-- 3. Create Policy
+create policy "Users can update their own profile."
+on profiles for update
+to authenticated                    -- the Postgres Role (recommended)
+using ( (select auth.uid()) = user_id )       -- checks if the existing row complies with the policy expression
+with check ( (select auth.uid()) = user_id ); -- checks if the new row complies with the policy expression
+If no with check expression is defined, then the using expression will be used both to determine which rows are visible (normal USING case) and which new rows will be allowed to be added (WITH CHECK case).
+To perform an UPDATE operation, a corresponding SELECT policy is required. Without a
+-- 1. Create table
+create table profiles (
+  id uuid primary key,
+  user_id uuid references auth.users,
+  avatar_url text
+);
+-- 2. Enable RLS
+alter table profiles enable row level security;
+-- 3. Create Policy
+create policy "Users can delete a profile."
+on profiles for delete
+to authenticated                     -- the Postgres Role (recommended)
+using ( (select auth.uid()) = user_id );      -- the actual Policy
+create view <VIEW_NAME>
+with(security_invoker = true)
+as select <QUERY>
+auth.uid()#
+auth.jwt()#
+raw_app_meta_data
+raw_user_meta_data
+create policy "User is in team"
+on my_table
+to authenticated
+using ( team_id in (select auth.jwt() -> 'app_metadata' -> 'teams'));
+auth.jwt()
+create policy "Restrict updates."
+on profiles
+as restrictive
+for update
+to authenticated using (
+  (select auth.jwt()->>'aal') = 'aal2'
+);
+alter role "role_name" with bypassrls;
+create policy "rls_test_select" on test_table
+to authenticated
+using ( (select auth.uid()) = user_id );
+create index userid
+on test_table
+using btree (user_id);
+Benchmarks#
+Test	Before (ms)	After (ms)	% Improvement	Change
+test1-indexed	171	< 0.1	99.94%	
+Details
+create policy "rls_test_select" on test_table
+to authenticated
+using ( (select auth.uid()) = user_id );
+auth.uid()
+auth.jwt()
+Benchmarks#
+Test	Before (ms)	After (ms)	% Improvement	Change
+test2a-wrappedSQL-uid	179	9	94.97%	
+Details
+test2b-wrappedSQL-isadmin	11,000	7	99.94%	
+Details
+test2c-wrappedSQL-two-functions	11,000	10	99.91%	
+Details
+test2d-wrappedSQL-sd-fun	178,000	12	99.993%	
+Details
+test2e-wrappedSQL-sd-fun-array	173000	16	99.991%	
+Details
+const { data } = supabase
+  .from('table')
+  .select()
+const { data } = supabase
+  .from('table')
+  .select()
+  .eq('user_id', userId)
+Benchmarks#
+Test	Before (ms)	After (ms)	% Improvement	Change
+test3-addfilter	171	9	94.74%	
+Details
+create policy "rls_test_select" on test_table
+to authenticated
+using (
+  exists (
+    select 1 from roles_table
+    where (select auth.uid()) = user_id and role = 'good_role'
+  )
+);
+create function private.has_good_role()
+returns boolean
+language plpgsql
+security definer -- will run as the creator
+as $$
+begin
+  return exists (
+    select 1 from roles_table
+    where (select auth.uid()) = user_id and role = 'good_role'
+  );
+end;
+$$;
+-- Update our policy to use this function:
+create policy "rls_test_select"
+on test_table
+to authenticated
+using ( (select private.has_good_role()) );
+create policy "rls_test_select" on test_table
+to authenticated
+using (
+  (select auth.uid()) in (
+    select user_id
+    from team_user
+    where team_user.team_id = team_id -- joins to the source "test_table.team_id"
+  )
+)
+create policy "rls_test_select" on test_table
+to authenticated
+using (
+  team_id in (
+    select team_id
+    from team_user
+    where user_id = (select auth.uid()) -- no join
+  )
+);
+;
+Benchmarks#
+Test	Before (ms)	After (ms)	% Improvement	Change
+test5-fixed-join	9,000	20	99.78%	
+Details
+create policy "rls_test_select" on rls_test
+using ( auth.uid() = user_id );
+create policy "rls_test_select" on rls_test
+to authenticated
+using ( (select auth.uid()) = user_id );
