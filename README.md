@@ -1024,3 +1024,10 @@ export const supabase = createBrowserClient(
 );
 NEXT_PUBLIC_SUPABASE_URL=https://ulafajakyuguntbytdui.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+npm install prisma --save-dev
+npx prisma init
+# Connect to Supabase via connection pooling
+DATABASE_URL="postgresql://postgres.ulafajakyuguntbytdui:[YOUR-PASSWORD]@aws-1-us-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+
+# Direct connection to the database. Used for migrations
+DIRECT_URL="postgresql://postgres.ulafajakyuguntbytdui:[YOUR-PASSWORD]@aws-1-us-west-2.pooler.supabase.com:5432/postgres"
