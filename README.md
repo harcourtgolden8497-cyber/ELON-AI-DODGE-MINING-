@@ -1792,6 +1792,84 @@ Even though this duplicates the contents of the Policy, Postgres can use the fil
 | ------------------------------------------------------------------------------------------------- | ----------- | ---------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | [test3-addfilter](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test3-addfilter) | 171         | 9          | 94.74%        | <details className="cursor-pointer">Before:<br/>`auth.uid() = user_id`<br/><br/>After:<br/>add `.eq` or `where` on `user_id`</details> |
 
-### Use security definer functions
+### Use security definer functions#
+A "security definer" function runs using the same role that created the function. This means that if you create a role with a superuser (like postgres), then that function will have bypassrls privileges. For example, if you had a policy like this:
 
-A "security definer" function runs using the same role that _created_ the function. This means that if you create a role with a superuser (like `postgres`), then that function will have `bypassrls` privileges. For example, if you had a policy like t
+create policy "rls_test_select" on test_table
+to authenticated
+using (
+  exists (
+    select 1 from roles_table
+    where (select auth.uid()) = user_id and role = 'good_role'
+  )
+);
+We can instead create a security definer function which can scan roles_table without any RLS penalties:
+
+create function private.has_good_role()
+returns boolean
+language plpgsql
+security definer -- will run as the creator
+as $$
+begin
+  return exists (
+    select 1 from roles_table
+    where (select auth.uid()) = user_id and role = 'good_role'
+  );
+end;
+$$;
+-- Update our policy to use this function:
+create policy "rls_test_select"
+on test_table
+to authenticated
+using ( (select private.has_good_role()) );
+Security-definer functions should never be created in a schema in the "Exposed schemas" inside your API settings`.
+
+Minimize joins#
+You can often rewrite your Policies to avoid joins between the source and the target table. Instead, try to organize your policy to fetch all the relevant data from the target table into an array or set, then you can use an IN or ANY operation in your filter.
+
+For example, this is an example of a slow policy which joins the source test_table to the target team_user:
+
+create policy "rls_test_select" on test_table
+to authenticated
+using (
+  (select auth.uid()) in (
+    select user_id
+    from team_user
+    where team_user.team_id = team_id -- joins to the source "test_table.team_id"
+  )
+);
+We can rewrite this to avoid this join, and instead select the filter criteria into a set:
+
+create policy "rls_test_select" on test_table
+to authenticated
+using (
+  team_id in (
+    select team_id
+    from team_user
+    where user_id = (select auth.uid()) -- no join
+  )
+);
+In this case you can also consider using a security definer function to bypass RLS on the join table:
+
+If the list exceeds 1000 items, a different approach may be needed or you may need to analyze the approach to ensure that the performance is acceptable.
+
+Benchmarks#
+Test	Before (ms)	After (ms)	% Improvement	Change
+test5-fixed-join	9,000	20	99.78%	
+Details
+Specify roles in your policies#
+Always use the Role of inside your policies, specified by the TO operator. For example, instead of this query:
+
+create policy "rls_test_select" on rls_test
+using ( auth.uid() = user_id );
+Use:
+
+create policy "rls_test_select" on rls_test
+to authenticated
+using ( (select auth.uid()) = user_id );
+This prevents the policy ( (select auth.uid()) = user_id ) from running for any anon users, since the execution stops at the to authenticated step.
+
+Benchmarks#
+Test	Before (ms)	After (ms)	% Improvement	Change
+test6-To-role	170	< 0.1	99.78%	
+Details
