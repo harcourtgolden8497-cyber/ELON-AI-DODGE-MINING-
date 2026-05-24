@@ -1873,3 +1873,70 @@ Benchmarks#
 Test	Before (ms)	After (ms)	% Improvement	Change
 test6-To-role	170	< 0.1	99.78%	
 Details
+await supabase.auth.signUp({
+  email: "someone@example.com",
+  password: "strongpassword"
+})
+auth.users
+
+Step 2 — Create a trigger to auto‑insert into your users table
+Run this SQL in Supabase SQL Editor:
+
+`sql
+create or replace function public.handlenewuser()
+returns trigger as $$
+begin
+  insert into public.users (id, email)
+  values (new.id, new.email);
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger onauthuser_created
+after insert on auth.users
+for each row execute procedure public.handlenewuser();
+`
+
+Now every time someone signs up:
+
+- Supabase inserts into auth.users
+- Your trigger inserts into your users table automatically
+
+No manual work. No Table Editor.
+
+---
+Create an API route (Next.js example)
+
+/app/api/create-user/route.ts
+
+`ts
+import { createClient } from '@supabase/supabase-js';
+
+export async function POST(req) {
+  const { email } = await req.json();
+
+  const supabase = createClient(
+    process.env.NEXTPUBLICSUPABASE_URL,
+    process.env.SUPABASESERVICEROLE_KEY
+  );
+
+  const { data, error } = await supabase
+    .from('users')
+    .insert([{ email }]);
+
+  return Response.json({ data, error });
+}
+`
+
+Step 2 — Your frontend calls it
+
+`ts
+await fetch("/api/create-user", {
+  method: "POST",
+  body: JSON.stringify({ email: "someone@example.com" })
+});
+`
+
+The user is inserted automatically.
+
+---
