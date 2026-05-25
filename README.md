@@ -9069,4 +9069,7 @@ Choose your final step:
 
 
 ---
+supabase link --project-ref ulafajakyuguntbytdui
+supabase migration new new-migration
+supabase db push
 
