@@ -12125,4 +12125,342 @@ BUT SUCCESS NOW DEPENDS ON ONLY 3 THINGS:
 
 
 ---
+package.json
+next.config.js
+app/
 
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+
+Signup
+  ↓
+Login
+  ↓
+Dashboard loads
+  ↓
+User sees balance
+  ↓
+Upgrade button works
+
+Create these pages:
+/login
+/signup
+/dashboard
+Dashboard should show:
+balance
+rewards
+referral link
+upgrade CTA
+
+export default function TeslaCyberstreamUI() { return ( <div className="min-h-screen bg-black text-white font-sans"> {/* NAVBAR */} <header className="flex items-center justify-between px-8 py-6 border-b border-zinc-800 sticky top-0 backdrop-blur bg-black/80 z-50"> <div> <h1 className="text-2xl font-bold tracking-wide">TESLA CYBERSTREAM</h1> <p className="text-xs text-zinc-400">AI Rewards & Analytics Platform</p> </div>
+
+<nav className="hidden md:flex gap-8 text-sm text-zinc-300">
+      <a href="#features" className="hover:text-cyan-400 transition">Features</a>
+      <a href="#dashboard" className="hover:text-cyan-400 transition">Dashboard</a>
+      <a href="#pricing" className="hover:text-cyan-400 transition">Pricing</a>
+      <a href="#faq" className="hover:text-cyan-400 transition">FAQ</a>
+    </nav>
+
+    <div className="flex gap-3">
+      <button className="px-4 py-2 rounded-xl border border-zinc-700 hover:border-cyan-400 transition">
+        Login
+      </button>
+      <button className="px-5 py-2 rounded-xl bg-cyan-500 text-black font-semibold hover:scale-105 transition">
+        Start Free
+      </button>
+    </div>
+  </header>
+
+  {/* HERO */}
+  <section className="px-8 md:px-20 py-24 relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-transparent blur-3xl" />
+
+    <div className="relative z-10 max-w-5xl mx-auto text-center">
+      <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800 rounded-full px-4 py-2 mb-6 text-sm text-zinc-300">
+        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        Live AI-Powered Rewards Platform
+      </div>
+
+      <h2 className="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-6">
+        AI-Powered
+        <span className="block text-cyan-400">Rewards & Analytics</span>
+      </h2>
+
+      <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
+        Track performance, unlock premium AI insights, and grow with a futuristic real-time dashboard ecosystem.
+      </p>
+
+      <div className="flex flex-col sm:flex-row justify-center gap-4">
+        <button className="px-8 py-4 rounded-2xl bg-cyan-500 text-black text-lg font-bold hover:scale-105 transition shadow-2xl shadow-cyan-500/20">
+          Start Free
+        </button>
+
+        <button className="px-8 py-4 rounded-2xl border border-zinc-700 text-lg hover:border-cyan-400 transition">
+          Watch Demo
+        </button>
+      </div>
+
+      {/* STATS */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
+        {[
+          ["99.99%", "System Uptime"],
+          ["24/7", "AI Monitoring"],
+          ["150K+", "Reward Events"],
+          ["Global", "Infrastructure"],
+        ].map(([value, label]) => (
+          <div
+            key={label}
+            className="bg-zinc-900/70 border border-zinc-800 rounded-3xl p-6 backdrop-blur"
+          >
+            <div className="text-3xl font-black text-cyan-400 mb-2">{value}</div>
+            <div className="text-zinc-400 text-sm">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FEATURES */}
+  <section id="features" className="px-8 md:px-20 py-20 border-t border-zinc-900">
+    <div className="max-w-7xl mx-auto">
+      <div className="text-center mb-16">
+        <h3 className="text-4xl font-bold mb-4">Why TESLA CYBERSTREAM?</h3>
+        <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          Designed for modern users who want premium AI dashboards, intelligent analytics, and scalable digital reward systems.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8">
+        {[
+          {
+            title: "Real-Time Analytics",
+            desc: "Track live performance metrics with intelligent AI insights.",
+          },
+          {
+            title: "AI Optimization",
+            desc: "Smart automation improves engagement and conversion performance.",
+          },
+          {
+            title: "Global Infrastructure",
+            desc: "Fast, scalable architecture powered by modern cloud systems.",
+          },
+        ].map((item) => (
+          <div
+            key={item.title}
+            className="rounded-3xl border border-zinc-800 bg-zinc-900/60 p-8 hover:border-cyan-400 transition"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold mb-6">
+              AI
+            </div>
+
+            <h4 className="text-2xl font-bold mb-4">{item.title}</h4>
+            <p className="text-zinc-400 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* DASHBOARD PREVIEW */}
+  <section id="dashboard" className="px-8 md:px-20 py-20 border-t border-zinc-900">
+    <div className="max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 gap-6">
+        <div>
+          <h3 className="text-4xl font-bold mb-3">Dashboard Preview</h3>
+          <p className="text-zinc-400 max-w-xl">
+            A futuristic AI dashboard built for rewards tracking, analytics monitoring, and user engagement growth.
+          </p>
+        </div>
+
+        <button className="px-6 py-3 rounded-2xl bg-cyan-500 text-black font-bold hover:scale-105 transition">
+          Launch Dashboard
+        </button>
+      </div>
+
+      {/* TOP CARDS */}
+      <div className="grid md:grid-cols-4 gap-6 mb-8">
+        {[
+          ["$12,480", "Total Balance"],
+          ["+18%", "Growth Rate"],
+          ["$2,940", "Referral Earnings"],
+          ["PRO", "Current Tier"],
+        ].map(([value, label]) => (
+          <div
+            key={label}
+            className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-400 transition"
+          >
+            <div className="text-zinc-400 text-sm mb-2">{label}</div>
+            <div className="text-3xl font-black text-cyan-400">{value}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* MAIN DASHBOARD GRID */}
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* GRAPH */}
+        <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h4 className="text-2xl font-bold">Performance Analytics</h4>
+              <p className="text-zinc-400 text-sm mt-1">Real-time AI optimization tracking</p>
+            </div>
+
+            <div className="px-4 py-2 rounded-xl bg-green-500/20 text-green-400 text-sm">
+              +12.4% Today
+            </div>
+          </div>
+
+          <div className="h-72 rounded-3xl bg-gradient-to-br from-cyan-500/10 to-zinc-800 border border-zinc-800 flex items-end justify-between p-6 gap-3 overflow-hidden">
+            {[35, 55, 48, 72, 60, 90, 75, 98].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 rounded-t-2xl bg-cyan-400/70 hover:bg-cyan-300 transition"
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ACTIVITY */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+          <div className="flex items-center justify-between mb-8">
+            <h4 className="text-2xl font-bold">Live Activity</h4>
+            <span className="text-green-400 text-sm">Online</span>
+          </div>
+
+          <div className="space-y-5">
+            {[
+              "Reward credit received",
+              "Referral bonus activated",
+              "AI optimization completed",
+              "Dashboard metrics updated",
+            ].map((activity) => (
+              <div
+                key={activity}
+                className="flex items-start gap-4 border-b border-zinc-800 pb-4"
+              >
+                <div className="w-3 h-3 rounded-full bg-cyan-400 mt-2"></div>
+                <div>
+                  <div className="font-medium">{activity}</div>
+                  <div className="text-zinc-500 text-sm">Just now</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* PRICING */}
+  <section id="pricing" className="px-8 md:px-20 py-20 border-t border-zinc-900">
+    <div className="max-w-7xl mx-auto text-center">
+      <h3 className="text-4xl font-bold mb-4">Simple Pricing</h3>
+      <p className="text-zinc-400 text-lg mb-16">
+        Flexible plans designed for every growth stage.
+      </p>
+
+      <div className="grid md:grid-cols-3 gap-8">
+        {[
+          {
+            name: "Starter",
+            price: "$0",
+            features: ["Basic dashboard", "Referral access", "Limited AI insights"],
+          },
+          {
+            name: "Pro",
+            price: "$19",
+            features: ["Advanced analytics", "AI optimization", "Priority rewards"],
+            featured: true,
+          },
+          {
+            name: "Business",
+            price: "$79",
+            features: ["Enterprise dashboard", "Global analytics", "VIP support"],
+          },
+        ].map((plan) => (
+          <div
+            key={plan.name}
+            className={`rounded-3xl border p-8 text-left transition hover:scale-105 ${
+              plan.featured
+                ? "border-cyan-400 bg-cyan-500/10"
+                : "border-zinc-800 bg-zinc-900"
+            }`}
+          >
+            <div className="mb-6">
+              <h4 className="text-2xl font-bold mb-2">{plan.name}</h4>
+              <div className="text-5xl font-black text-cyan-400">
+                {plan.price}
+                <span className="text-lg text-zinc-400">/mo</span>
+              </div>
+            </div>
+
+            <div className="space-y-4 mb-8">
+              {plan.features.map((feature) => (
+                <div key={feature} className="flex items-center gap-3 text-zinc-300">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
+                  {feature}
+                </div>
+              ))}
+            </div>
+
+            <button className="w-full py-4 rounded-2xl bg-cyan-500 text-black font-bold hover:opacity-90 transition">
+              Get Started
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section id="faq" className="px-8 md:px-20 py-20 border-t border-zinc-900">
+    <div className="max-w-4xl mx-auto">
+      <h3 className="text-4xl font-bold text-center mb-16">Frequently Asked Questions</h3>
+
+      <div className="space-y-6">
+        {[
+          [
+            "How does the platform work?",
+            "TESLA CYBERSTREAM combines AI-powered analytics, rewards tracking, and referral systems into a scalable SaaS experience.",
+          ],
+          [
+            "Can I upgrade later?",
+            "Yes. You can upgrade or downgrade your plan anytime from the dashboard.",
+          ],
+          [
+            "Is the platform mobile friendly?",
+            "Yes. The dashboard is optimized for mobile, tablet, and desktop users.",
+          ],
+        ].map(([q, a]) => (
+          <div
+            key={q}
+            className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8"
+          >
+            <h4 className="text-xl font-bold mb-4">{q}</h4>
+            <p className="text-zinc-400 leading-relaxed">{a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FOOTER */}
+  <footer className="px-8 md:px-20 py-10 border-t border-zinc-900 text-center text-zinc-500">
+    <p>© 2026 TESLA CYBERSTREAM — AI Rewards & Analytics Platform</p>
+  </footer>
+</div>
+
+); }
+Update these labels in the code:
+TESLA CYBERSTREAM → ELON AI DOGE MINING
+AI Rewards & Analytics Platform → AI Mining & Rewards Platform
+Hero text:
+“AI-Powered Rewards & Analytics”
+change to:
+“AI-Powered Doge Mining & Analytics”
