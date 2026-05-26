@@ -13143,25 +13143,9 @@ export default function Dashboard() {
     <div style={{ padding: 20 }}>
       <h1>ELON AI DOGE MINING DASHBOARD</h1>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-        <div className="card">
-          <h3>Wallet Balance</h3>
-          <p>{balance.toFixed(4)} DOGE</p>
-        </div>
-
-        <div className="card">
-          <h3>Hash Rate</h3>
-          <p>{hashRate.toFixed(2)} MH/s</p>
-        </div>
-
-        <div className="card">
-          <h3>Status</h3>
-          <p>Mining Active</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+{% raw %}
+...
+{% endraw %}
 
 
 ---
@@ -13717,14 +13701,3 @@ Liquid
 {{ height: `${h}` }}
 { height: `${h}` }
 ```js
-{% raw %}
-YOUR CODE HERE
-{% endraw %}
-```
-{{
-height:
-${h}
-{% raw %}
-{{ height: `${h}` }}
-{% endraw %}
-
