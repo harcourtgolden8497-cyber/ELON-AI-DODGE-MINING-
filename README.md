@@ -16579,3 +16579,4 @@ const card = { flex: 1, background: "#1f2937", padding: 20, borderRadius: 12, co
 const chartCard = { background: "#1f2937", padding: 20, borderRadius: 12, marginBottom: 30, color: "white", };
 
 const button = { background: "#00ff88", color: "black", border: "none", padding: "12px 20px", borderRadius: 8, cursor: "pointer", fontWeight: "bold", };
+.nojekyll
