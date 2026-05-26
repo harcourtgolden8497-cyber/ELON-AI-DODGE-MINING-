@@ -7,7 +7,7 @@ This system is designed as a **scalable analytics + simulation SaaS application*
 ---
 
 ## 🌐 Live Demo
-https://officialelondogemining.live
+https://elonaidogemining.live
 
 ---
 
