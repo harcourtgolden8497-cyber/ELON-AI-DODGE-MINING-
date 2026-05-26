@@ -13706,3 +13706,25 @@ npm run build
 Start Production
 
 npm run start
+Replace problematic JS blocks like this:
+JavaScript
+{{ height: `${h}` }}
+with:
+Liquid
+{% raw %}
+{{ height: `${h}` }}
+{% endraw %}
+{{ height: `${h}` }}
+{ height: `${h}` }
+```js
+{% raw %}
+YOUR CODE HERE
+{% endraw %}
+```
+{{
+height:
+${h}
+{% raw %}
+{{ height: `${h}` }}
+{% endraw %}
+
