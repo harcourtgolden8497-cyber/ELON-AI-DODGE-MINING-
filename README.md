@@ -13701,3 +13701,2881 @@ Liquid
 {{ height: `${h}` }}
 { height: `${h}` }
 ```js
+
+.nojekyll
+
+Disable Jekyll processing
+
+.github/workflows/deploy.yml
+
+name: ELON AI DOGE MINING CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: .next
+BINANCE PAY INTEGRATION BLUEPRINT
+Use:
+pay.binance.com⁠�
+FLOW:
+
+User → Checkout → Binance Pay QR/Link → Webhook → Activate mining plan
+REQUIRED BACKEND:
+/api/create-payment
+/api/binance-webhook
+/api/activate-user-plan
+🧠 7. SAAS SYSTEM ARCHITECTURE
+
+Frontend (Next.js)
+   ↓
+Netlify / Vercel
+   ↓
+API Layer (Node.js / Next API routes)
+   ↓
+Supabase / Firebase (Users + Plans)
+   ↓
+Binance Pay (Payments)
+📊 8. DASHBOARD MODULES (YOUR PLATFORM CORE)
+Build these sections:
+🧠 AI Mining Dashboard
+📈 Real-time hash analytics (simulated or real pool API)
+💰 Earnings tracker
+🧾 Payment history
+👤 User profile
+🔐 Subscription plans
+⚙️ Admin panel
+🔐 9. SECURITY SETUP
+Add:
+Environment variables:
+
+BINANCE_API_KEY=
+BINANCE_SECRET=
+DATABASE_URL=
+JWT_SECRET=
+Enable:
+HTTPS (Netlify default)
+Auth system (Supabase recommended)
+
+
+Alright — here’s your FULL production SaaS system blueprint for ELON AI DOGE MINING, built the right way so it can actually run, scale, and deploy cleanly on Netlify or Vercel.
+
+This is a real SaaS architecture, not a GitHub Pages demo.
+
+
+---
+
+🚀 ELON AI DOGE MINING — FULL PRODUCTION SAAS SYSTEM
+
+🧱 1. STACK (FINAL ARCHITECTURE)
+
+Frontend
+
+Next.js 14 (App Router)
+
+Tailwind CSS
+
+Zustand (state management)
+
+Recharts (analytics dashboard UI)
+
+
+Backend
+
+Next.js API routes (or separate Node service)
+
+Binance Pay API integration
+
+Webhook system
+
+
+Database
+
+Supabase (recommended)
+
+or Firebase (alternative)
+
+
+Auth
+
+Supabase Auth (email + OAuth)
+
+JWT session handling
+
+
+Deployment
+
+Netlify (frontend)
+
+or Vercel (best for Next.js)
+
+
+
+---
+
+🧠 2. SYSTEM ARCHITECTURE FLOW
+
+User
+ ↓
+Next.js Frontend (Dashboard)
+ ↓
+API Routes (Backend Layer)
+ ↓
+Supabase DB (Users, Plans, Payments)
+ ↓
+Binance Pay (Payments)
+ ↓
+Webhook → Activate Plan → Update Dashboard
+
+
+---
+
+📁 3. PROJECT STRUCTURE (COPY THIS)
+
+elon-ai-doge-mining/
+│
+├── app/
+│   ├── page.tsx                # Landing page
+│   ├── dashboard/
+│   │    ├── page.tsx          # Main dashboard
+│   │    ├── analytics.tsx
+│   │    ├── earnings.tsx
+│   │    └── settings.tsx
+│   │
+│   ├── login/
+│   ├── signup/
+│   └── api/
+│        ├── create-payment/
+│        ├── binance-webhook/
+│        ├── activate-plan/
+│        └── user/
+│
+├── components/
+│   ├── Navbar.tsx
+│   ├── Sidebar.tsx
+│   ├── StatsCard.tsx
+│   ├── Chart.tsx
+│   └── PlanCard.tsx
+│
+├── lib/
+│   ├── supabaseClient.ts
+│   ├── binancePay.ts
+│   └── auth.ts
+│
+├── styles/
+├── public/
+├── .env.local
+├── next.config.js
+└── package.json
+
+
+---
+
+💰 4. BINANCE PAY SYSTEM (CORE MONEY FLOW)
+
+Payment Flow:
+
+User selects plan
+ → API creates Binance Pay order
+ → QR code generated
+ → user pays
+ → webhook confirms payment
+ → system activates subscription
+
+
+---
+
+🔧 API: Create Payment
+
+// app/api/create-payment/route.ts
+
+export async function POST(req: Request) {
+  const { userId, plan } = await req.json();
+
+  const payment = {
+    merchantTradeNo: Date.now().toString(),
+    orderAmount: plan.price,
+    currency: "USDT",
+    productName: plan.name,
+  };
+
+  return Response.json({
+    success: true,
+    payment,
+  });
+}
+
+
+---
+
+🔔 Webhook: Activate Plan
+
+// app/api/binance-webhook/route.ts
+
+export async function POST(req: Request) {
+  const data = await req.json();
+
+  if (data.status === "PAID") {
+    // update database
+    // activate user plan
+  }
+
+  return Response.json({ ok: true });
+}
+
+
+---
+
+🧠 5. DASHBOARD FEATURES
+
+User Dashboard:
+
+📊 Earnings overview
+
+⚡ AI mining simulation stats
+
+💰 Active plan status
+
+📈 Daily profit chart
+
+🔁 Withdrawal requests
+
+⚙️ Settings
+
+
+
+---
+
+Admin Dashboard:
+
+User management
+
+Payment tracking
+
+Plan activation control
+
+Revenue analytics
+
+
+
+---
+
+🗄️ 6. DATABASE STRUCTURE (SUPABASE)
+
+USERS
+
+id
+email
+password_hash
+created_at
+plan_id
+balance
+
+PLANS
+
+id
+name
+price
+daily_profit
+duration
+
+PAYMENTS
+
+id
+user_id
+amount
+status
+tx_id
+created_at
+
+
+---
+
+🎨 7. UI DESIGN SYSTEM
+
+Use:
+
+Black + gold theme
+
+Neon green accents (crypto style)
+
+Glassmorphism cards
+
+Animated charts
+
+
+
+---
+
+Dashboard UI layout:
+
+[Sidebar]
+Dashboard
+Earnings
+Plans
+Settings
+
+[Main Panel]
+Total Balance
+Daily Profit
+Active Plan
+Chart
+Withdraw Button
+
+
+---
+
+⚙️ 8. ENVIRONMENT VARIABLES
+
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+BINANCE_API_KEY=
+BINANCE_SECRET=
+JWT_SECRET=
+NEXT_PUBLIC_APP_URL=
+
+
+---
+
+🚀 9. DEPLOYMENT (PRODUCTION FLOW)
+
+Option A (BEST)
+
+[Vercel](https://vercel.com?utm_source=chatgpt.com)
+
+Connect GitHub repo
+
+Auto deploy on push
+
+Native Next.js support
+
+
+Option B
+
+[Netlify](https://www.netlify.com?utm_source=chatgpt.com)
+
+Add build command:
+
+
+npm run build
+
+Publish directory:
+
+
+.next
+
+
+---
+
+🔐 10. SECURITY (IMPORTANT)
+
+Add:
+
+Rate limiting on APIs
+
+JWT auth middleware
+
+Webhook signature verification (Binance Pay)
+
+HTTPS only
+
+
+
+---
+
+🧩 11. MINING ENGINE (IMPORTANT REALITY CHECK)
+
+Instead of fake “mining”, use:
+
+✔ simulated mining engine OR
+✔ real external API data OR
+✔ reward system logic
+
+Example:
+
+daily_profit = base_rate × user_plan_multiplier
+
+
+---
+
+🚀 12. BUILD ORDER (DO THIS EXACTLY)
+
+1. Initialize Next.js app
+
+
+2. Build UI dashboard
+
+
+3. Add Supabase auth
+
+
+4. Build payment system
+
+
+5. Connect Binance Pay
+
+
+6. Add webhook system
+
+
+7. Deploy to Vercel/Netlify
+
+
+8. Secure APIs
+
+🚀 ELON AI DOGE MINING — NETLIFY ONE-CLICK DEPLOYMENT BLUEPRINT
+
+✅ STEP 1 — Push Your Project to [GitHub](https://github.com?utm_source=chatgpt.com)
+
+Your repository should contain:
+
+app/
+components/
+lib/
+public/
+package.json
+next.config.js
+.env.local
+
+
+---
+
+✅ STEP 2 — Add REQUIRED FILES
+
+
+---
+
+📄 netlify.toml
+
+Create:
+
+netlify.toml
+
+Paste:
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+
+---
+
+📄 next.config.js
+
+Paste:
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+module.exports = nextConfig;
+
+
+---
+
+✅ STEP 3 — INSTALL NETLIFY NEXT.JS PLUGIN
+
+Run:
+
+npm install @netlify/plugin-nextjs
+
+Then push changes to GitHub.
+
+
+---
+
+✅ STEP 4 — CONNECT TO [Netlify](https://app.netlify.com?utm_source=chatgpt.com)
+
+Go to:
+
+Netlify → Add new site → Import from Git
+
+Choose:
+
+GitHub
+
+Repository: ELON-AI-DODGE-MINING
+
+
+
+---
+
+✅ STEP 5 — BUILD SETTINGS
+
+Netlify usually auto-detects Next.js.
+
+If not, manually set:
+
+Setting	Value
+
+Build command	npm run build
+Publish directory	.next
+Node version	18
+
+
+
+---
+
+✅ STEP 6 — ENVIRONMENT VARIABLES
+
+Go to:
+
+Site settings → Environment variables
+
+Add:
+
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+
+BINANCE_API_KEY=your_key
+BINANCE_SECRET=your_secret
+
+JWT_SECRET=super_secret
+
+
+---
+
+✅ STEP 7 — DEPLOY
+
+Click:
+
+Deploy site
+
+Netlify will:
+
+✔ install dependencies
+✔ build Next.js app
+✔ deploy frontend
+✔ generate live URL
+
+
+---
+
+✅ STEP 8 — CUSTOM DOMAIN (OPTIONAL)
+
+Go to:
+
+Domain management
+
+Connect:
+
+elonaidogemining.com
+
+or your preferred domain
+
+
+
+---
+
+⚠️ IMPORTANT FIXES (VERY IMPORTANT)
+
+🔥 Disable GitHub Pages/Jekyll
+
+Since you are now using Netlify:
+
+Go to:
+
+GitHub → Settings → Pages
+
+Disable Pages OR leave it unused.
+
+
+---
+
+🔥 Add .nojekyll
+
+Create file:
+
+.nojekyll
+
+This prevents Liquid/Jekyll crashes forever.
+
+
+---
+
+🚀 FINAL DEPLOYMENT FLOW
+
+GitHub Push
+   ↓
+Netlify Auto Build
+   ↓
+Production Deploy
+   ↓
+Live SaaS Platform
+
+
+🚀 ELON AI DOGE MINING — PREMIUM PRODUCTION UI BUILD
+
+🧱 CORE FRONTEND STACK
+
+Next.js 14
+
+Tailwind CSS
+
+TypeScript
+
+Zustand
+
+Recharts
+
+Supabase Auth
+
+Binance Pay API
+
+Netlify Deployment
+
+
+
+---
+
+📁 PRODUCTION UI STRUCTURE
+
+app/
+├── page.tsx
+├── dashboard/
+│   ├── page.tsx
+│   ├── analytics/
+│   ├── earnings/
+│   ├── plans/
+│   └── settings/
+│
+├── login/
+├── signup/
+└── api/
+
+components/
+├── Navbar.tsx
+├── Sidebar.tsx
+├── StatsCard.tsx
+├── EarningsChart.tsx
+├── PlanCard.tsx
+├── PaymentModal.tsx
+└── MiningActivity.tsx
+
+
+---
+
+🎨 PREMIUM DESIGN SYSTEM
+
+Theme
+
+Background: Black / Dark Graphite
+
+Accent: Neon Green + Gold
+
+Cards: Glassmorphism
+
+Buttons: Cybertruck-inspired metallic gradients
+
+Charts: Animated analytics visuals
+
+
+
+---
+
+🏠 LANDING PAGE SECTIONS
+
+Hero Section
+
+Headline:
+
+AI-Powered Doge Mining & Analytics Platform
+
+CTA Buttons:
+
+Start Mining
+
+View Plans
+
+Connect Wallet
+
+
+
+---
+
+Features Section
+
+Cards:
+
+AI Mining Automation
+
+Binance Pay Integration
+
+Real-Time Analytics
+
+Global Crypto Rewards
+
+
+
+---
+
+Pricing Section
+
+Starter Plan
+
+$1,888/year
+
+Basic analytics
+
+Mining simulation
+
+
+Pro Plan
+
+$9,999/year
+
+Advanced AI insights
+
+Premium rewards engine
+
+
+Enterprise Plan
+
+Custom pricing
+
+Admin dashboard
+
+API access
+
+
+
+---
+
+📊 DASHBOARD UI
+
+Left Sidebar
+
+Dashboard
+
+Earnings
+
+Plans
+
+Wallet
+
+Analytics
+
+Settings
+
+Logout
+
+
+
+---
+
+Main Dashboard Widgets
+
+Stats Cards
+
+Total Earnings
+
+Active Plan
+
+Mining Power
+
+Referral Rewards
+
+
+
+---
+
+Analytics Charts
+
+Charts:
+
+Daily Mining Growth
+
+Reward History
+
+Revenue Projection
+
+User Activity
+
+
+
+---
+
+💰 BINANCE PAY FLOW
+
+Select Plan
+   ↓
+Generate Binance Pay QR
+   ↓
+User Pays
+   ↓
+Webhook Confirms Payment
+   ↓
+Activate Mining Plan
+
+
+---
+
+🔐 AUTHENTICATION FLOW
+
+Login Methods
+
+Email + Password
+
+Google OAuth
+
+GitHub OAuth
+
+
+
+---
+
+🗄️ DATABASE TABLES
+
+users
+
+id
+email
+plan_id
+balance
+created_at
+
+payments
+
+id
+user_id
+amount
+status
+tx_hash
+created_at
+
+plans
+
+id
+name
+price
+daily_rewards
+
+
+---
+
+⚙️ DEPLOYMENT CONFIG
+
+netlify.toml
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+
+---
+
+🔑 ENVIRONMENT VARIABLES
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+BINANCE_API_KEY=
+BINANCE_SECRET=
+JWT_SECRET=
+
+
+---
+
+🚀 DEPLOYMENT STEPS
+
+1. Push project to GitHub
+
+
+2. Connect repository to Netlify
+
+
+3. Configure environment variables
+
+
+4. Deploy production build
+
+
+5. Test Binance Pay webhook
+
+
+6. Launch platform
+
+
+
+🚀 HOW TO BUILD THE EXPANSIONS FOR ELON AI DOGE MINING
+
+Here’s the real production roadmap for each advanced module.
+
+
+---
+
+🤖 1. AI TRADING ASSISTANT
+
+PURPOSE
+
+Provides:
+
+market insights
+
+trade signals
+
+portfolio analysis
+
+AI chat assistant
+
+
+
+---
+
+STACK
+
+Layer	Tech
+
+AI API	[OpenAI Platform](https://platform.openai.com?utm_source=chatgpt.com)
+Backend	Next.js API routes
+Charts	Recharts / TradingView
+Crypto data	[CoinGecko API](https://www.coingecko.com/en/api?utm_source=chatgpt.com)
+
+
+
+---
+
+FLOW
+
+User asks AI
+   ↓
+Backend sends prompt
+   ↓
+AI returns analysis
+   ↓
+Dashboard displays response
+
+
+---
+
+API EXAMPLE
+
+const response = await fetch("https://api.openai.com/v1/chat/completions", {
+  method: "POST",
+});
+
+
+---
+
+👥 2. REFERRAL SYSTEM
+
+PURPOSE
+
+Users invite others and earn rewards.
+
+
+---
+
+DATABASE TABLE
+
+referrals
+id
+referrer_id
+referred_user_id
+reward_amount
+status
+
+
+---
+
+FLOW
+
+User shares referral link
+   ↓
+New user signs up
+   ↓
+System tracks referral
+   ↓
+Reward credited
+
+
+---
+
+REFERRAL LINK
+
+https://yourapp.com/signup?ref=USER123
+
+
+---
+
+💳 3. REAL CRYPTO WALLET INTEGRATION
+
+PURPOSE
+
+Allow:
+
+deposits
+
+withdrawals
+
+wallet balances
+
+
+
+---
+
+OPTIONS
+
+EASY
+
+Use:
+
+[Coinbase Developer Platform](https://www.coinbase.com/developer-platform?utm_source=chatgpt.com)
+
+[MetaMask](https://metamask.io?utm_source=chatgpt.com)
+
+
+ADVANCED
+
+Use:
+
+WalletConnect
+
+Web3.js
+
+ethers.js
+
+
+
+---
+
+FLOW
+
+User connects wallet
+   ↓
+Wallet address saved
+   ↓
+Platform reads balances
+
+
+---
+
+🖼 4. NFT REWARDS SYSTEM
+
+PURPOSE
+
+Reward users with collectible NFTs.
+
+
+---
+
+TECH
+
+Layer	Tech
+
+Blockchain	Polygon
+Minting	Thirdweb
+NFT storage	IPFS
+
+
+
+---
+
+USE CASES
+
+VIP mining badges
+
+premium memberships
+
+reward collectibles
+
+
+
+---
+
+PLATFORM
+
+[thirdweb](https://thirdweb.com?utm_source=chatgpt.com)
+
+
+---
+
+📱 5. MOBILE APP
+
+BEST OPTION
+
+Use:
+
+React Native
+
+Expo
+
+
+
+---
+
+WHY
+
+✔ iOS + Android together
+✔ shares code with Next.js
+✔ faster development
+
+
+---
+
+APP MODULES
+
+Login
+
+Dashboard
+
+Wallet
+
+Earnings
+
+Notifications
+
+Withdrawals
+
+
+
+---
+
+📲 6. TELEGRAM BOT
+
+PURPOSE
+
+Automates:
+
+alerts
+
+mining updates
+
+payments
+
+support
+
+
+
+---
+
+CREATE BOT
+
+Use: [BotFather](https://t.me/BotFather?utm_source=chatgpt.com)
+
+
+---
+
+STACK
+
+Layer	Tech
+
+Bot	Telegraf.js
+Hosting	Railway / Render
+Notifications	Telegram API
+
+
+
+---
+
+FLOW
+
+User subscribes
+   ↓
+Bot sends mining updates
+   ↓
+User receives alerts
+
+
+---
+
+📊 7. ADMIN ANALYTICS ENGINE
+
+PURPOSE
+
+Admin sees:
+
+revenue
+
+active users
+
+mining activity
+
+subscription metrics
+
+
+
+---
+
+DASHBOARD WIDGETS
+
+Total revenue
+
+Daily active users
+
+Top plans
+
+Withdrawal volume
+
+Conversion rate
+
+
+
+---
+
+CHART STACK
+
+Use:
+
+Recharts
+
+Chart.js
+
+Supabase analytics
+
+
+
+---
+
+🚀 FINAL ENTERPRISE ARCHITECTURE
+
+Frontend (Next.js)
+   ↓
+Mobile App (React Native)
+   ↓
+API Layer
+   ↓
+Supabase Database
+   ↓
+Binance Pay + Wallet APIs
+   ↓
+AI Assistant + Analytics
+
+
+---
+
+🔥 BEST DEPLOYMENT STACK
+
+Service	Purpose
+
+[Vercel](https://vercel.com?utm_source=chatgpt.com)	Next.js hosting
+[Netlify](https://www.netlify.com?utm_source=chatgpt.com)	Alternative frontend hosting
+[Supabase](https://supabase.com?utm_source=chatgpt.com)	Database/auth
+[Cloudflare](https://www.cloudflare.com?utm_source=chatgpt.com)	Security/CDN
+[Railway](https://railway.app?utm_source=chatgpt.com)	Bot/backend hosting
+
+
+🚀 ELON AI DOGE MINING — ENTERPRISE EXPANSION MASTERFILE
+
+🌍 FULL ENTERPRISE ECOSYSTEM OVERVIEW
+
+This masterfile contains the complete architecture and implementation blueprint for the advanced ELON AI DOGE MINING SaaS ecosystem.
+
+Modules Included:
+
+1. AI Trading Assistant
+
+
+2. Referral System
+
+
+3. Real Crypto Wallet Integration
+
+
+4. NFT Rewards System
+
+
+5. Mobile App Architecture
+
+
+6. Telegram Bot System
+
+
+7. Admin Analytics Engine
+
+
+8. Production Deployment Stack
+
+
+9. Security Layer
+
+
+10. Enterprise Scaling Strategy
+
+
+
+
+---
+
+🤖 1. AI TRADING ASSISTANT
+
+PURPOSE
+
+The AI assistant provides:
+
+Market analysis
+
+AI trade signals
+
+Portfolio recommendations
+
+Mining optimization suggestions
+
+Crypto education
+
+Real-time chat support
+
+
+
+---
+
+TECHNOLOGY STACK
+
+Layer	Technology
+
+AI Engine	OpenAI API
+Charts	Recharts
+Backend	Next.js API Routes
+Market Data	CoinGecko API
+State Management	Zustand
+
+
+
+---
+
+SYSTEM FLOW
+
+User sends question
+   ↓
+Frontend dashboard
+   ↓
+Next.js API route
+   ↓
+OpenAI API request
+   ↓
+AI response returned
+   ↓
+Dashboard displays insights
+
+
+---
+
+API EXAMPLE
+
+export async function POST(req: Request) {
+  const body = await req.json();
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "user",
+          content: body.prompt,
+        },
+      ],
+    }),
+  });
+
+  const data = await response.json();
+
+  return Response.json(data);
+}
+
+
+---
+
+👥 2. REFERRAL SYSTEM
+
+PURPOSE
+
+Users invite others and receive:
+
+Mining bonuses
+
+Commission rewards
+
+NFT rewards
+
+VIP upgrades
+
+
+
+---
+
+DATABASE TABLE
+
+CREATE TABLE referrals (
+  id UUID PRIMARY KEY,
+  referrer_id UUID,
+  referred_user_id UUID,
+  reward_amount NUMERIC,
+  status TEXT,
+  created_at TIMESTAMP
+);
+
+
+---
+
+REFERRAL FLOW
+
+User shares referral link
+   ↓
+Friend signs up
+   ↓
+System tracks referral
+   ↓
+Reward activated
+
+
+---
+
+REFERRAL URL
+
+https://elonaidogemining.com/signup?ref=USER123
+
+
+---
+
+💳 3. REAL CRYPTO WALLET INTEGRATION
+
+PURPOSE
+
+Users can:
+
+Connect wallets
+
+Deposit crypto
+
+Withdraw rewards
+
+View balances
+
+Verify ownership
+
+
+
+---
+
+WALLET OPTIONS
+
+SIMPLE INTEGRATION
+
+MetaMask
+
+Coinbase Wallet
+
+Binance Wallet
+
+
+ADVANCED WEB3 STACK
+
+ethers.js
+
+WalletConnect
+
+wagmi
+
+viem
+
+
+
+---
+
+WALLET FLOW
+
+User clicks connect wallet
+   ↓
+Wallet authorization popup
+   ↓
+Address saved in database
+   ↓
+Dashboard displays balances
+
+
+---
+
+SAMPLE CONNECT BUTTON
+
+<button>
+  Connect Wallet
+</button>
+
+
+---
+
+🖼 4. NFT REWARDS SYSTEM
+
+PURPOSE
+
+Users receive NFTs for:
+
+Referral milestones
+
+VIP memberships
+
+Mining achievements
+
+Promotional campaigns
+
+
+
+---
+
+NFT STACK
+
+Layer	Technology
+
+Blockchain	Polygon
+Minting	thirdweb
+Storage	IPFS
+Wallet	MetaMask
+
+
+
+---
+
+NFT FLOW
+
+User reaches milestone
+   ↓
+NFT metadata generated
+   ↓
+Mint request sent
+   ↓
+NFT delivered to wallet
+
+
+---
+
+THIRDWEB
+
+https://thirdweb.com
+
+
+---
+
+📱 5. MOBILE APP SYSTEM
+
+PURPOSE
+
+Deliver a native mobile experience for:
+
+Android
+
+iPhone
+
+Tablet devices
+
+
+
+---
+
+MOBILE STACK
+
+Layer	Technology
+
+Framework	React Native
+Runtime	Expo
+State	Zustand
+Charts	Victory Native
+
+
+
+---
+
+MOBILE FEATURES
+
+Login
+
+Dashboard
+
+Wallet
+
+Mining stats
+
+Push notifications
+
+Referral tracking
+
+Withdrawals
+
+
+
+---
+
+MOBILE FLOW
+
+User opens app
+   ↓
+Auth verification
+   ↓
+Dashboard loads
+   ↓
+Mining analytics shown
+
+
+---
+
+📲 6. TELEGRAM BOT SYSTEM
+
+PURPOSE
+
+The Telegram bot automates:
+
+Notifications
+
+Referral alerts
+
+Payment confirmations
+
+Support automation
+
+Mining updates
+
+
+
+---
+
+BOT STACK
+
+Layer	Technology
+
+Bot Framework	Telegraf.js
+Hosting	Railway
+API	Telegram Bot API
+
+
+
+---
+
+CREATE BOT
+
+Use:
+
+https://t.me/BotFather
+
+
+---
+
+BOT FLOW
+
+User joins Telegram bot
+   ↓
+Bot verifies account
+   ↓
+Mining notifications sent
+
+
+---
+
+BOT COMMANDS
+
+/start
+/balance
+/mining
+/referrals
+/withdraw
+/help
+
+
+---
+
+📊 7. ADMIN ANALYTICS ENGINE
+
+PURPOSE
+
+Admin dashboard monitors:
+
+Revenue
+
+User growth
+
+Active plans
+
+Mining performance
+
+Payment analytics
+
+
+
+---
+
+DASHBOARD WIDGETS
+
+Total revenue
+
+Daily active users
+
+Conversion rate
+
+Mining rewards
+
+Withdrawal requests
+
+Referral statistics
+
+
+
+---
+
+ANALYTICS STACK
+
+Layer	Technology
+
+Charts	Recharts
+Database	Supabase
+Dashboard	Next.js
+
+
+
+---
+
+ANALYTICS FLOW
+
+Database metrics collected
+   ↓
+API processes statistics
+   ↓
+Charts render insights
+
+
+---
+
+🚀 8. PRODUCTION DEPLOYMENT STACK
+
+FRONTEND HOSTING
+
+OPTION 1
+
+Vercel
+
+OPTION 2
+
+Netlify
+
+
+---
+
+DATABASE
+
+Supabase
+
+
+---
+
+CDN + SECURITY
+
+Cloudflare
+
+
+---
+
+BOT HOSTING
+
+Railway
+
+
+---
+
+DEPLOYMENT FLOW
+
+GitHub push
+   ↓
+CI/CD pipeline triggered
+   ↓
+Build process executes
+   ↓
+Production deployment
+
+
+---
+
+🔐 9. SECURITY SYSTEM
+
+REQUIRED SECURITY LAYERS
+
+HTTPS
+
+JWT auth
+
+Rate limiting
+
+Wallet verification
+
+API validation
+
+Webhook verification
+
+
+
+---
+
+ENV VARIABLES
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+OPENAI_API_KEY=
+BINANCE_API_KEY=
+BINANCE_SECRET=
+JWT_SECRET=
+
+
+---
+
+🌍 10. ENTERPRISE SCALING STRATEGY
+
+PHASE 1
+
+Dashboard
+
+Authentication
+
+Binance Pay
+
+Analytics
+
+
+
+---
+
+PHASE 2
+
+Wallet integration
+
+Referral system
+
+Telegram bot
+
+AI assistant
+
+
+
+---
+
+PHASE 3
+
+NFT rewards
+
+Mobile apps
+
+Enterprise automation
+
+Global scaling
+
+
+
+---
+
+🧱 FINAL ENTERPRISE ARCHITECTURE
+
+Frontend (Next.js)
+   ↓
+Mobile App (React Native)
+   ↓
+API Layer
+   ↓
+Supabase Database
+   ↓
+Binance Pay + Wallet APIs
+   ↓
+AI Assistant + Analytics
+   ↓
+Telegram Bot + Notifications
+
+
+---
+
+✅ FINAL RESULT
+
+ELON AI DOGE MINING becomes a complete enterprise-grade crypto SaaS ecosystem featuring:
+
+AI-powered analytics
+
+Wallet integration
+
+Crypto rewards
+
+NFT systems
+
+Mobile applications
+
+Telegram automation
+
+Enterprise admin analytics
+
+Global deployment infrastructure
+
+Scalable production architecture🚀 ELON AI DOGE MINING — ENTERPRISE EXPANSION MASTERFILE
+
+🌍 FULL ENTERPRISE ECOSYSTEM OVERVIEW
+
+This masterfile contains the complete architecture and implementation blueprint for the advanced ELON AI DOGE MINING SaaS ecosystem.
+
+Modules Included:
+
+1. AI Trading Assistant
+
+
+2. Referral System
+
+
+3. Real Crypto Wallet Integration
+
+
+4. NFT Rewards System
+
+
+5. Mobile App Architecture
+
+
+6. Telegram Bot System
+
+
+7. Admin Analytics Engine
+
+
+8. Production Deployment Stack
+
+
+9. Security Layer
+
+
+10. Enterprise Scaling Strategy
+
+
+
+
+---
+
+🤖 1. AI TRADING ASSISTANT
+
+PURPOSE
+
+The AI assistant provides:
+
+Market analysis
+
+AI trade signals
+
+Portfolio recommendations
+
+Mining optimization suggestions
+
+Crypto education
+
+Real-time chat support
+
+
+
+---
+
+TECHNOLOGY STACK
+
+Layer	Technology
+
+AI Engine	OpenAI API
+Charts	Recharts
+Backend	Next.js API Routes
+Market Data	CoinGecko API
+State Management	Zustand
+
+
+
+---
+
+SYSTEM FLOW
+
+User sends question
+   ↓
+Frontend dashboard
+   ↓
+Next.js API route
+   ↓
+OpenAI API request
+   ↓
+AI response returned
+   ↓
+Dashboard displays insights
+
+
+---
+
+API EXAMPLE
+
+export async function POST(req: Request) {
+  const body = await req.json();
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "user",
+          content: body.prompt,
+        },
+      ],
+    }),
+  });
+
+  const data = await response.json();
+
+  return Response.json(data);
+}
+
+
+---
+
+👥 2. REFERRAL SYSTEM
+
+PURPOSE
+
+Users invite others and receive:
+
+Mining bonuses
+
+Commission rewards
+
+NFT rewards
+
+VIP upgrades
+
+
+
+---
+
+DATABASE TABLE
+
+CREATE TABLE referrals (
+  id UUID PRIMARY KEY,
+  referrer_id UUID,
+  referred_user_id UUID,
+  reward_amount NUMERIC,
+  status TEXT,
+  created_at TIMESTAMP
+);
+
+
+---
+
+REFERRAL FLOW
+
+User shares referral link
+   ↓
+Friend signs up
+   ↓
+System tracks referral
+   ↓
+Reward activated
+
+
+---
+
+REFERRAL URL
+
+https://elonaidogemining.com/signup?ref=USER123
+
+
+---
+
+💳 3. REAL CRYPTO WALLET INTEGRATION
+
+PURPOSE
+
+Users can:
+
+Connect wallets
+
+Deposit crypto
+
+Withdraw rewards
+
+View balances
+
+Verify ownership
+
+
+
+---
+
+WALLET OPTIONS
+
+SIMPLE INTEGRATION
+
+MetaMask
+
+Coinbase Wallet
+
+Binance Wallet
+
+
+ADVANCED WEB3 STACK
+
+ethers.js
+
+WalletConnect
+
+wagmi
+
+viem
+
+
+
+---
+
+WALLET FLOW
+
+User clicks connect wallet
+   ↓
+Wallet authorization popup
+   ↓
+Address saved in database
+   ↓
+Dashboard displays balances
+
+
+---
+
+SAMPLE CONNECT BUTTON
+
+<button>
+  Connect Wallet
+</button>
+
+
+---
+
+🖼 4. NFT REWARDS SYSTEM
+
+PURPOSE
+
+Users receive NFTs for:
+
+Referral milestones
+
+VIP memberships
+
+Mining achievements
+
+Promotional campaigns
+
+
+
+---
+
+NFT STACK
+
+Layer	Technology
+
+Blockchain	Polygon
+Minting	thirdweb
+Storage	IPFS
+Wallet	MetaMask
+
+
+
+---
+
+NFT FLOW
+
+User reaches milestone
+   ↓
+NFT metadata generated
+   ↓
+Mint request sent
+   ↓
+NFT delivered to wallet
+
+
+---
+
+THIRDWEB
+
+https://thirdweb.com
+
+
+---
+
+📱 5. MOBILE APP SYSTEM
+
+PURPOSE
+
+Deliver a native mobile experience for:
+
+Android
+
+iPhone
+
+Tablet devices
+
+
+
+---
+
+MOBILE STACK
+
+Layer	Technology
+
+Framework	React Native
+Runtime	Expo
+State	Zustand
+Charts	Victory Native
+
+
+
+---
+
+MOBILE FEATURES
+
+Login
+
+Dashboard
+
+Wallet
+
+Mining stats
+
+Push notifications
+
+Referral tracking
+
+Withdrawals
+
+
+
+---
+
+MOBILE FLOW
+
+User opens app
+   ↓
+Auth verification
+   ↓
+Dashboard loads
+   ↓
+Mining analytics shown
+
+
+---
+
+📲 6. TELEGRAM BOT SYSTEM
+
+PURPOSE
+
+The Telegram bot automates:
+
+Notifications
+
+Referral alerts
+
+Payment confirmations
+
+Support automation
+
+Mining updates
+
+
+
+---
+
+BOT STACK
+
+Layer	Technology
+
+Bot Framework	Telegraf.js
+Hosting	Railway
+API	Telegram Bot API
+
+
+
+---
+
+CREATE BOT
+
+Use:
+
+https://t.me/BotFather
+
+
+---
+
+BOT FLOW
+
+User joins Telegram bot
+   ↓
+Bot verifies account
+   ↓
+Mining notifications sent
+
+
+---
+
+BOT COMMANDS
+
+/start
+/balance
+/mining
+/referrals
+/withdraw
+/help
+
+
+---
+
+📊 7. ADMIN ANALYTICS ENGINE
+
+PURPOSE
+
+Admin dashboard monitors:
+
+Revenue
+
+User growth
+
+Active plans
+
+Mining performance
+
+Payment analytics
+
+
+
+---
+
+DASHBOARD WIDGETS
+
+Total revenue
+
+Daily active users
+
+Conversion rate
+
+Mining rewards
+
+Withdrawal requests
+
+Referral statistics
+
+
+
+---
+
+ANALYTICS STACK
+
+Layer	Technology
+
+Charts	Recharts
+Database	Supabase
+Dashboard	Next.js
+
+
+
+---
+
+ANALYTICS FLOW
+
+Database metrics collected
+   ↓
+API processes statistics
+   ↓
+Charts render insights
+
+
+---
+
+🚀 8. PRODUCTION DEPLOYMENT STACK
+
+FRONTEND HOSTING
+
+OPTION 1
+
+Vercel
+
+OPTION 2
+
+Netlify
+
+
+---
+
+DATABASE
+
+Supabase
+
+
+---
+
+CDN + SECURITY
+
+Cloudflare
+
+
+---
+
+BOT HOSTING
+
+Railway
+
+
+---
+
+DEPLOYMENT FLOW
+
+GitHub push
+   ↓
+CI/CD pipeline triggered
+   ↓
+Build process executes
+   ↓
+Production deployment
+
+
+---
+
+🔐 9. SECURITY SYSTEM
+
+REQUIRED SECURITY LAYERS
+
+HTTPS
+
+JWT auth
+
+Rate limiting
+
+Wallet verification
+
+API validation
+
+Webhook verification
+
+
+
+---
+
+ENV VARIABLES
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+OPENAI_API_KEY=
+BINANCE_API_KEY=
+BINANCE_SECRET=
+JWT_SECRET=
+
+
+---
+
+🌍 10. ENTERPRISE SCALING STRATEGY
+
+PHASE 1
+
+Dashboard
+
+Authentication
+
+Binance Pay
+
+Analytics
+
+
+
+---
+
+PHASE 2
+
+Wallet integration
+
+Referral system
+
+Telegram bot
+
+AI assistant
+
+
+
+---
+
+PHASE 3
+
+NFT rewards
+
+Mobile apps
+
+Enterprise automation
+
+Global scaling
+
+
+
+---
+
+🧱 FINAL ENTERPRISE ARCHITECTURE
+
+Frontend (Next.js)
+   ↓
+Mobile App (React Native)
+   ↓
+API Layer
+   ↓
+Supabase Database
+   ↓
+Binance Pay + Wallet APIs
+   ↓
+AI Assistant + Analytics
+   ↓
+Telegram Bot + Notifications
+
+
+---
+
+✅ FINAL RESULT
+
+ELON AI DOGE MINING becomes a complete enterprise-grade crypto SaaS ecosystem featuring:
+
+AI-powered analytics
+
+Wallet integration
+
+Crypto rewards
+
+NFT systems
+
+Mobile applications
+
+Telegram automation
+
+Enterprise admin analytics
+
+Global deployment infrastructure
+
+Scalable production architecture
+
+.nojekyll
+
+
+
+// 🚀 ELON AI DOGE MINING — PRODUCTION DASHBOARD (Next.js 14 + Supabase + Charts)
+
+// ============================= // 📁 app/layout.tsx // =============================
+
+import "./globals.css"; import { createClient } from "@supabase/supabase-js";
+
+export const metadata = { title: "ELON AI DOGE MINING", description: "AI Mining SaaS Dashboard", };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) { return ( <html lang="en"> <body style={{ margin: 0, background: "#0b0f14", color: "white" }}> {children} </body> </html> ); }
+
+// ============================= // 📁 lib/supabase.ts // =============================
+
+import { createClient } from "@supabase/supabase-js";
+
+export const supabase = createClient( process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! );
+
+// ============================= // 📁 app/page.tsx (Landing) // =============================
+
+export default function Home() { return ( <main style={{ padding: 40 }}> <h1>🚀 ELON AI DOGE MINING</h1> <p>AI Powered Mining Dashboard Platform</p> <a href="/login">Login</a> </main> ); }
+
+// ============================= // 📁 app/login/page.tsx // =============================
+
+"use client";
+
+import { useState } from "react"; import { supabase } from "../../lib/supabase"; import { useRouter } from "next/navigation";
+
+export default function Login() { const router = useRouter(); const [email, setEmail] = useState(""); const [password, setPassword] = useState("");
+
+const login = async () => { const { error } = await supabase.auth.signInWithPassword({ email, password, });
+
+if (!error) router.push("/dashboard");
+
+};
+
+return ( <div style={{ padding: 40 }}> <h2>Login</h2> <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} /> <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} /> <button onClick={login}>Login</button> </div> ); }
+
+// ============================= // 📁 app/dashboard/page.tsx // =============================
+
+"use client";
+
+import { useEffect, useState } from "react"; import { supabase } from "../../lib/supabase"; import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, } from "recharts";
+
+export default function Dashboard() { const [user, setUser] = useState<any>(null);
+
+useEffect(() => { supabase.auth.getUser().then(({ data }) => { setUser(data.user); }); }, []);
+
+const data = [ { day: "Mon", earnings: 120 }, { day: "Tue", earnings: 220 }, { day: "Wed", earnings: 180 }, { day: "Thu", earnings: 300 }, { day: "Fri", earnings: 250 }, ];
+
+return ( <div style={{ display: "flex" }}> {/* Sidebar */} <div style={{ width: 220, padding: 20, background: "#111827" }}> <h3>Dashboard</h3> <p>User: {user?.email}</p> <ul> <li>Overview</li> <li>Earnings</li> <li>Mining</li> <li>Settings</li> </ul> </div>
+
+{/* Main */}
+  <div style={{ flex: 1, padding: 30 }}>
+    <h1>Mining Overview</h1>
+
+    {/* Stats */}
+    <div style={{ display: "flex", gap: 20 }}>
+      <div style={card}>💰 $1,240</div>
+      <div style={card}>⚡ Active Mining</div>
+      <div style={card}>📈 +12.4%</div>
+    </div>
+
+    {/* Chart */}
+    <div style={{ marginTop: 40, height: 300 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data}>
+          <CartesianGrid stroke="#333" />
+          <XAxis dataKey="day" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="earnings" stroke="#00ff88" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+</div>
+
+); }
+
+const card = { flex: 1, padding: 20, background: "#1f2937", borderRadius: 10, textAlign: "center", };
+
+// ============================= // 📁 middleware.ts (auth guard) // =============================
+
+import { NextResponse } from "next/server"; import type { NextRequest } from "next/server";
+
+export function middleware(req: NextRequest) { const isDashboard = req.nextUrl.pathname.startsWith("/dashboard");
+
+if (isDashboard) { const auth = req.cookies.get("sb-access-token");
+
+if (!auth) {
+  return NextResponse.redirect(new URL("/login", req.url));
+}
+
+}
+
+return NextResponse.next(); }
+
+export const config = { matcher: ["/dashboard/:path*"], };
+
+
+npm install @supabase/supabase-js recharts
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+npm run dev
+
+// 🚀 ELON AI DOGE MINING // PAYMENTS SYSTEM + ADMIN PANEL (Next.js 14 Production Module)
+
+// ===================================================== // 📁 app/api/create-payment/route.ts // =====================================================
+
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) { const body = await req.json();
+
+const order = { merchantTradeNo: ORDER_${Date.now()}, amount: body.amount, currency: "USDT", productName: body.plan, status: "PENDING", };
+
+// Simulated Binance Pay URL const paymentUrl = https://pay.binance.com/en/checkout/${order.merchantTradeNo};
+
+return NextResponse.json({ success: true, paymentUrl, order, }); }
+
+// ===================================================== // 📁 app/api/binance-webhook/route.ts // =====================================================
+
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) { const payload = await req.json();
+
+console.log("Webhook received:", payload);
+
+// Example logic if (payload.status === "PAID") { console.log("Activate mining plan"); }
+
+return NextResponse.json({ success: true }); }
+
+// ===================================================== // 📁 app/dashboard/payments/page.tsx // =====================================================
+
+"use client";
+
+import { useState } from "react";
+
+export default function PaymentsPage() { const [loading, setLoading] = useState(false);
+
+const createPayment = async () => { setLoading(true);
+
+const res = await fetch("/api/create-payment", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    amount: 499,
+    plan: "Pro Mining Plan",
+  }),
+});
+
+const data = await res.json();
+
+setLoading(false);
+
+if (data.paymentUrl) {
+  window.location.href = data.paymentUrl;
+}
+
+};
+
+return ( <div style={{ padding: 30 }}> <h1>💰 Payments</h1>
+
+<div style={card}>
+    <h2>Pro Mining Plan</h2>
+    <p>$499 USDT</p>
+
+    <button onClick={createPayment} style={button}>
+      {loading ? "Processing..." : "Pay with Binance"}
+    </button>
+  </div>
+</div>
+
+); }
+
+// ===================================================== // 📁 app/admin/page.tsx // =====================================================
+
+"use client";
+
+import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, BarChart, Bar, } from "recharts";
+
+const revenueData = [ { month: "Jan", revenue: 1200 }, { month: "Feb", revenue: 2400 }, { month: "Mar", revenue: 1800 }, { month: "Apr", revenue: 4200 }, { month: "May", revenue: 6100 }, ];
+
+const usersData = [ { day: "Mon", users: 20 }, { day: "Tue", users: 35 }, { day: "Wed", users: 50 }, { day: "Thu", users: 42 }, { day: "Fri", users: 65 }, ];
+
+export default function AdminPanel() { return ( <div style={{ display: "flex", minHeight: "100vh" }}> {/* Sidebar */} <div style={sidebar}> <h2>🛠 Admin</h2>
+
+<ul style={{ listStyle: "none", padding: 0 }}>
+      <li>Dashboard</li>
+      <li>Payments</li>
+      <li>Users</li>
+      <li>Analytics</li>
+      <li>Mining</li>
+      <li>Security</li>
+    </ul>
+  </div>
+
+  {/* Main */}
+  <div style={{ flex: 1, padding: 30 }}>
+    <h1>📊 Admin Analytics Dashboard</h1>
+
+    {/* Stats */}
+    <div style={{ display: "flex", gap: 20, marginBottom: 40 }}>
+      <div style={card}>💰 Revenue: $12,400</div>
+      <div style={card}>👥 Users: 1,203</div>
+      <div style={card}>⚡ Active Mining: 842</div>
+    </div>
+
+    {/* Revenue Chart */}
+    <div style={chartCard}>
+      <h2>Revenue Growth</h2>
+
+      <div style={{ height: 300 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={revenueData}>
+            <CartesianGrid stroke="#333" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="revenue"
+              stroke="#00ff88"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+
+    {/* Users Chart */}
+    <div style={chartCard}>
+      <h2>User Growth</h2>
+
+      <div style={{ height: 300 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={usersData}>
+            <CartesianGrid stroke="#333" />
+            <XAxis dataKey="day" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="users" fill="#facc15" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+
+    {/* Payments Table */}
+    <div style={chartCard}>
+      <h2>Recent Payments</h2>
+
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Plan</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>user1@email.com</td>
+            <td>Pro Plan</td>
+            <td>$499</td>
+            <td>Paid</td>
+          </tr>
+
+          <tr>
+            <td>user2@email.com</td>
+            <td>Starter Plan</td>
+            <td>$99</td>
+            <td>Pending</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+); }
+
+// ===================================================== // 📁 styles // =====================================================
+
+const sidebar = { width: 240, background: "#111827", padding: 20, color: "white", };
+
+const card = { flex: 1, background: "#1f2937", padding: 20, borderRadius: 12, color: "white", };
+
+const chartCard = { background: "#1f2937", padding: 20, borderRadius: 12, marginBottom: 30, color: "white", };
+
+const button = { background: "#00ff88", color: "black", border: "none", padding: "12px 20px", borderRadius: 8, cursor: "pointer", fontWeight: "bold", };
