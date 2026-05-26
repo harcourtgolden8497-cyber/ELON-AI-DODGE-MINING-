@@ -18744,4 +18744,27 @@ ELON AI DOGE MINING is now structured as a:
 
 > Global AI-powered fintech-style SaaS ecosystem with real-time analytics, wallet infrastructure, payment systems, and scalable mobile architecture.
 
+✅ Clean old deployment files
+DELETE these if they exist:
+Plain text
+.github/workflows/azure-webapps-node.yml
+Delete any:
+broken Azure workflows
+duplicate workflows
+Jekyll workflows
+✅ Add required files
+📄 .nojekyll
+Create in root:
+Plain text
+.nojekyll
+📄 netlify.toml
+TOML
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+
 .nojekyll
