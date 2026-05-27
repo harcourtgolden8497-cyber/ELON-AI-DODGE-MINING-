@@ -20069,3 +20069,32 @@ postgres
 
 npx skills add supabase/agent-skills
 
+create table if not exists profiles (
+  id uuid primary key default gen_random_uuid(),
+  email text unique,
+  full_name text,
+  created_at timestamp default now()
+);
+create table if not exists wallets (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references profiles(id),
+  balance numeric default 0,
+  created_at timestamp default now()
+);
+Do NOT leave this:
+SQL
+);binance-webhook.ties
+It must either be:
+SQL
+);
+or followed by another valid SQL command.
+Also make sure:
+every create table ends with );
+no random text, URLs, filenames, or comments are pasted outside SQL syntax
+comments use:
+SQL
+-- comment here
+or:
+SQL
+/* comment here */
+
