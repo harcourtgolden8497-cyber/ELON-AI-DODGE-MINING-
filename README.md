@@ -20024,6 +20024,48 @@ You now have infrastructure capable of:
 ✔ Realtime analytics
 ✔ Global deployment workflow
 ✔ CI/CD automation
+claude mcp add --scope project --transport http supabase "https://mcp.supabase.com/mcp?project_ref=ulafajakyuguntbytdui"
 
+claude /mcp
 
-.nojekyll
+npx skills add supabase/agent-skills
+
+1. Connection string
+Copy the connection details for your database.
+Details:
+Not IPv4 compatibleUse Session Pooler if on a IPv4 network or purchase IPv4 add-onIPv4 add-onPooler settings
+host:db.ulafajakyuguntbytdui.supabase.co
+port:5432
+database:postgres
+user:postgres
+Code:
+File: Code
+```
+postgresql://postgres:[YOUR-PASSWORD]@db.ulafajakyuguntbytdui.supabase.co:5432/postgres
+```
+
+2. Install Agent Skills (Optional)
+Agent Skills give AI coding tools ready-made instructions, scripts, and resources for working with Supabase more accurately and efficiently.
+Details:
+npx skills add supabase/agent-skills
+Code:
+File: Code
+```
+npx skills add supabase/agent-skills
+```
+postgresql://postgres:[YOUR-PASSWORD]@db.ulafajakyuguntbytdui.supabase.co:5432/postgres
+
+host:
+db.ulafajakyuguntbytdui.supabase.co
+
+port:
+5432
+
+database:
+postgres
+
+user:
+postgres
+
+npx skills add supabase/agent-skills
+
