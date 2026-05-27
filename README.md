@@ -18869,6 +18869,59 @@ create table if not exists audit_logs (
   created_at timestamp with time zone default now()
 );
 
+-- Enable RLS
+alter table profiles enable row level security;
+alter table wallets enable row level security;
+alter table payments enable row level security;
+alter table withdrawals enable row level security;
+alter table mining_sessions enable row level security;
+alter table audit_logs enable row level security;
+
+-- Profiles Policy
+create policy "Users can view own profile"
+on profiles
+for select
+using (auth.uid() = id);
+
+-- Wallets Policy
+create policy "Users can view own wallet"
+on wallets
+for select
+using (auth.uid() = user_id);
+
+-- Payments Policy
+create policy "Users can view own payments"
+on payments
+for select
+using (auth.uid() = user_id);
+
+-- Withdrawals Policy
+create policy "Users can view own withdrawals"
+on withdrawals
+for select
+using (auth.uid() = user_id);
+
+-- Mining Sessions Policy
+create policy "Users can view own mining sessions"
+on mining_sessions
+for select
+using (auth.uid() = user_id);
+/pages/api/binance-webhook.ts
+
+/app/api/binance-webhook/route.ts
+
+/pages/api/binance-webhook.ties
+import typre {
+
+/supabase
+  /migrations
+    001_wallets.sql
+    002_payments.sql
+    003_rls_policies.sql
+
+/supabase/migrations/
+
+
 
 
 .nojekyll
