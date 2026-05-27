@@ -20097,55 +20097,198 @@ SQL
 or:
 SQL
 /* comment here */
-# Download and install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+name: Azure Web Apps Node.js CI
 
-# Load nvm without restarting terminal
-\. "$HOME/.nvm/nvm.sh"
+on:
+  push:
+    branches:
+      - main
 
-nvm install 26
-node -v
-v26.2.0
-npm -v
-11.13.0
-npm install -g netlify-cli
-netlify --version
-netlify login
-Navigate to Your Project Folder
-Example:
-Bash
-cd ELON-AI-DODGE-MINING-
-Common Netlify CLI Commands
-Command
-Purpose
-netlify init
-Connect/create a Netlify site
-netlify deploy
-Deploy preview
-netlify deploy --prod
-Deploy to production
-netlify env:list
-View environment variables
-netlify open
-Open site dashboard
-netlify status
-Check linked project
-Download and install nvm:
+  workflow_dispatch:
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-in lieu of restarting the shell
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-. "$HOME/.nvm/nvm.sh"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
 
-Download and install Node.js:
+      - name: Install dependencies
+        run: npm install
 
-nvm install 26
+      - name: Build application
+        run: npm run build
 
-Verify the Node.js version:
+      - name: Deploy placeholder
+        run: echo "Deployment step ready"
+Fix broken YAML workflow syntax
+Your project name should stay consistent everywhere as:
 
-node -v # Should print "v26.2.0".
+🚀 ELON AI DOGE MINING
 
-Verify npm version:
+For your stack using:
 
-npm -v # Should print "11.13.0".
+
+your best setup now is to replace the broken Azure workflow with a clean production workflow.
+
+Use this exact workflow file:
+
+.github/workflows/deploy.yml
+
+name: ELON AI DOGE MINING CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint --if-present
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Success Message
+        run: echo "ELON AI DOGE MINING build completed successfully"
+
+Then Do This
+
+1. Delete Broken File
+
+Delete:
+
+.github/workflows/azure-webapps-node.yml
+
+
+---
+
+2. Create New File
+
+Create:
+
+.github/workflows/deploy.yml
+
+Paste the workflow above.
+
+
+---
+
+3. Commit Changes
+
+Commit message:
+
+Setup ELON AI DOGE MINING production workflow
+
+
+---
+
+4. Your Environment Variables
+
+Inside  add:
+
+NEXT_PUBLIC_SITE_URL=https://elonaidogemining.live
+NEXT_PUBLIC_SUPABASE_URL=YOUR_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
+BINANCE_PAY_MERCHANT_ID=726040643
+BINANCE_SECRET_KEY=YOUR_NEW_SECRET
+OPENAI_API_KEY=YOUR_OPENAI_KEY
+
+
+---
+
+5. Recommended Production Stack
+
+Frontend
+
+Next.js 14
+
+Tailwind CSS
+
+Framer Motion
+
+
+Backend
+
+Supabase
+
+Edge Functions
+
+PostgreSQL
+
+
+Payments
+
+Binance Pay
+
+USDT
+
+DOGE
+
+BTC
+
+
+Hosting
+
+Netlify
+
+
+Authentication
+
+Supabase Auth
+
+
+
+---
+
+6. Recommended Folder Structure
+
+/app
+/components
+/lib
+/hooks
+/public
+/styles
+/supabase
+/netlify/functions
+
+
+---
+
+7. Run Locally
+
+Inside terminal:
+
+npm install
+netlify dev
+git add .
+git commit -m "Production deployment"
+git push origin main
+
+
+
+
