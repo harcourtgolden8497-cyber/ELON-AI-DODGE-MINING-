@@ -18766,5 +18766,109 @@ TOML
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+-- Enable RLS
+alter table profiles enable row level security;
+alter table wallets enable row level security;
+alter table payments enable row level security;
+alter table withdrawals enable row level security;
+alter table mining_sessions enable row level security;
+alter table audit_logs enable row level security;
+
+-- Profiles Policy
+create policy "Users can view own profile"
+on profiles
+for select
+using (auth.uid() = id);
+
+-- Wallets Policy
+create policy "Users can view own wallet"
+on wallets
+for select
+using (auth.uid() = user_id);
+
+-- Payments Policy
+create policy "Users can view own payments"
+on payments
+for select
+using (auth.uid() = user_id);
+
+-- Withdrawals Policy
+create policy "Users can view own withdrawals"
+on withdrawals
+for select
+using (auth.uid() = user_id);
+
+-- Mining Sessions Policy
+create policy "Users can view own mining sessions"
+on mining_sessions
+for select
+using (auth.uid() = user_id);
+
+/pages/api/binance-webhook.ts
+
+/app/api/binance-webhook/route.ts
+
+-- =========================================
+-- ELON AI DOGE MINING DATABASE SCHEMA
+-- =========================================
+
+-- Profiles
+create table if not exists profiles (
+  id uuid primary key,
+  email text unique,
+  role text default 'user',
+  created_at timestamp with time zone default now()
+);
+
+-- Wallets
+create table if not exists wallets (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references profiles(id) on delete cascade,
+  balance numeric default 0,
+  mining_power numeric default 0,
+  created_at timestamp with time zone default now()
+);
+
+-- Deposits / Payments
+create table if not exists payments (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references profiles(id) on delete cascade,
+  amount numeric not null,
+  currency text default 'USDT',
+  status text default 'pending',
+  payment_method text default 'binancepay',
+  transaction_id text,
+  created_at timestamp with time zone default now()
+);
+
+-- Withdrawals
+create table if not exists withdrawals (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references profiles(id) on delete cascade,
+  amount numeric not null,
+  wallet_address text,
+  status text default 'pending',
+  created_at timestamp with time zone default now()
+);
+
+-- Mining Activity
+create table if not exists mining_sessions (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references profiles(id) on delete cascade,
+  hash_rate numeric default 0,
+  rewards_earned numeric default 0,
+  started_at timestamp with time zone default now()
+);
+
+-- Audit Logs
+create table if not exists audit_logs (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references profiles(id) on delete cascade,
+  action text,
+  details jsonb,
+  created_at timestamp with time zone default now()
+);
+
+
 
 .nojekyll
