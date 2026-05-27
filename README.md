@@ -1,6 +1,6 @@
 # 🚀 ELON AI DOGE MINING SAAS PLATFORM
 
-A production-ready **AI-powered SaaS dashboard platform** built with Next.js 14.
+A production-ready **AI-powered SaaS dashboard platform** built with Next.js 
 
 This system is designed as a **scalable analytics + simulation SaaS application** with authentication, billing, AI assistant, and enterprise-grade architecture.
 
@@ -20278,8 +20278,136 @@ Supabase Auth
 
 
 ---
+Download and install nvm:
 
-7. Run Locally
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+
+in lieu of restarting the shell
+
+. "$HOME/.nvm/nvm.sh"
+
+Download and install Node.js:
+
+nvm install 26
+
+Verify the Node.js version:
+
+node -v # Should print "v26.2.0".
+
+Verify npm version:
+
+npm -v # Should print "11.13.0".
+
+name: Azure Web Apps Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: npm run build
+
+      - name: Deploy placeholder
+        run: echo "Deployment step ready"
+Fix broken YAML workflow syntax
+
+curl -o- ...
+nvm install 26
+
+name: ELON AI DOGE MINING CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint --if-present
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Success Message
+        run: echo "ELON AI DOGE MINING build completed successfully"
+.github/workflows/azure-webapps-node.yml
+.github/workflows/deploy.yml
+Setup ELON AI DOGE MINING production workflow
+/app
+/components
+/lib
+/hooks
+/public
+/styles
+/supabase
+/netlify/functions
+npm install
+netlify dev
+git add .
+git commit -m "Production deployment"
+git push origin main
+
+.github/SECURITY.md
+# Security Policy
+
+## Supported Versions
+We actively support the latest production version of ELON AI DOGE MINING.
+
+## Reporting a Vulnerability
+If you discover a security vulnerability, please report it responsibly:
+
+- Email: officialelondoegemining@gmail.com
+- Or open a private security advisory via GitHub Security tab
+
+We will respond within 48–72 hours.
+
+## Scope
+This security policy applies to:
+- Web application (Next.js frontend)
+- API endpoints
+- Authentication system (Supabase)
+- Payment system (Binance Pay integration)
+
+## Do NOT:
+- Publicly disclose vulnerabilities before fix
+- Exploit user accounts or payment systems
+Run Locally
 
 Inside terminal:
 
@@ -20293,5 +20421,16 @@ git push origin main
   /app
     package.json
     next.config.js
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCxceAf9GEPVM1V01gmjWF9XVyJ+XtgUWpYIqHq3hw120sL0re+X4lELIxEq38vcLKwtWqlv3e1/0mYr7GY3/H0cc8+4vhthEuU/uSqXxAgPtdox6AT1xR4XN9bs8+t0M6OcVV4ij2KruBP6lwbkCiL2VzuWYw4niZU3mP6WQ2bT/o8Naer1IMv518+dW509NKOtMrTL0cMimqqlpp9wdITTJ3DjLnbxV+cs6yOIfU9PSss39iiKLDVW9bgy+jbymz4VfslbgjqG9JgDk/mTtSi+qz52l5u0baOTjtd8HEqJPDrGxHsPDTZoKwpfvDjC4iR4A0UNleOYNQmvqwYknYPRE3tzuWVbz1BFi3ttS6PiG0FmSWvmg/ZFyVCTY89be/t93aU/N7dRdFAZUg3fzF65qONcWpHC6Qz4SZXepGl4VzhEyyEYplrZpZjPTpEXN0uRizjkkLCpuocyYWMymHDdkV4lVKx2+JnRklTZVcN8s0AH4S/kp62P4Vebru0li76ym8CSyd50Bwj8GRds5lslhCk6wKl99ZivtOplTUUDQ+lSKsWqXSUAvFb64FfmJRRnbMKIBGiAfbXbTZGof6kLVA0HJtUYgwQLg/r92AnDxhpVFiaDljKvR/ZTGcTTqXKnZcOVnXqAOcOv5rCciniyRct9iFVtk0yB9nXbXRj6w==
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
+</script>
 
+<script>
+  console.log("ELON AI DOGE MINING tracking loaded");
+</script>
 
