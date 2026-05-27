@@ -20097,4 +20097,36 @@ SQL
 or:
 SQL
 /* comment here */
+# Download and install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 
+# Load nvm without restarting terminal
+\. "$HOME/.nvm/nvm.sh"
+
+nvm install 26
+node -v
+v26.2.0
+npm -v
+11.13.0
+npm install -g netlify-cli
+netlify --version
+netlify login
+Navigate to Your Project Folder
+Example:
+Bash
+cd ELON-AI-DODGE-MINING-
+Common Netlify CLI Commands
+Command
+Purpose
+netlify init
+Connect/create a Netlify site
+netlify deploy
+Deploy preview
+netlify deploy --prod
+Deploy to production
+netlify env:list
+View environment variables
+netlify open
+Open site dashboard
+netlify status
+Check linked project
