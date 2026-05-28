@@ -22920,3 +22920,167 @@ Do not set base = "/opt/build"
 
 ---
 
+Agent Fix Blueprint: Netlify Build Fails Because Base Directory = /opt/build
+
+1. Immediate Diagnosis
+Netlify stops during config parsing because:
+
+- The base directory is set to /opt/build
+- That folder does not exist in the repository
+- Netlify halts before running any build commands
+
+This is a configuration error, not a code error.
+
+---
+
+2. Agent Fix (Do This First — Guaranteed to Work)
+
+Step 1 — Open Netlify UI Build Settings
+Navigate to:
+
+Site settings → Build & deploy → Build settings → Base directory
+
+If it says /opt/build:
+- Clear the field completely  
+  (leave it blank so Netlify uses the repo root)
+
+OR if the project lives in a subfolder:
+Set it to the actual folder name, e.g.:
+
+- frontend
+- app
+- site
+- web
+
+Never use absolute paths like /opt/build.
+
+Save the change.
+
+---
+
+3. Step 2 — Check netlify.toml (if present)
+
+Open netlify.toml and remove or correct the base:
+
+If it currently has:
+`toml
+[build]
+base = "/opt/build"
+`
+
+Fix it by either removing it:
+`toml
+[build]
+publish = "dist"
+command = "npm run build"
+`
+
+Or setting it to a real folder:
+`toml
+[build]
+base = "frontend"
+publish = "frontend/dist"
+command = "npm run build"
+`
+
+Commit the change.
+
+---
+
+4. Step 3 — Trigger a New Deploy
+Click Deploy site or push a commit.
+
+Netlify will now correctly locate the project and proceed with the build.
+
+---
+
+5. Agent Verification Checklist
+The agent should confirm:
+
+- [ ] The base directory in the UI is blank or points to a real folder  
+- [ ] netlify.toml does not reference /opt/build  
+- [ ] The publish directory is correct relative to the base  
+- [ ] The build command works when run locally from the base directory  
+
+If all four are true, the deploy will succeed.
+
+---
+
+
+Agent Fix Blueprint: Netlify Build Fails Because Base Directory = /opt/build
+
+1. Immediate Diagnosis
+Netlify stops during config parsing because:
+
+- The base directory is set to /opt/build
+- That folder does not exist in the repository
+- Netlify halts before running any build commands
+
+This is a configuration error, not a code error.
+
+---
+
+2. Agent Fix (Do This First — Guaranteed to Work)
+
+Step 1 — Open Netlify UI Build Settings
+Navigate to:
+
+Site settings → Build & deploy → Build settings → Base directory
+
+If it says /opt/build:
+- Clear the field completely  
+  (leave it blank so Netlify uses the repo root)
+
+OR if the project lives in a subfolder:
+Set it to the actual folder name, e.g.:
+
+- frontend
+- app
+- site
+- web
+
+Never use absolute paths like /opt/build.
+
+Save the change.
+
+---
+
+3. Step 2 — Check netlify.toml (if present)
+
+Open netlify.toml and remove or correct the base:
+
+If it currently has:
+`toml
+[build]
+base = "/opt/build"
+`
+
+Fix it by either removing it:
+`toml
+[build]
+publish = "dist"
+command = "npm run build"
+`
+
+Or setting it to a real folder:
+`toml
+[build]
+base = "frontend"
+publish = "frontend/dist"
+command = "npm run build"
+`
+
+Commit the change.
+
+---
+
+4. Step 3 — Trigger a New Deploy
+Click Deploy site or push a commit.
+
+Netlify will now correctly locate the project and proceed with the build.
+
+---
+
+https://api.netlify.com/preview_server_hooks/6a187ea33fab81a8f0fdc111
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4Q4cuVQmJ044A4OsoGIZahUliBXg+JZmfx8RODNR9Q6Bb9Tu286yJWNzMcMX6oz0lAbqNLU8aei9Gi5XQ3B4Dbj+8s9qxp34zqrunhL0dDiGWoVSRt9jyI2vnQC5TTopBcxGy2f0hivTnRvqZWBuL6RcJYt84sADrOzLpZ5E7jLg1JVq6Hw1J9uqT5Fi1ot/KuRxBv2MmTzH0tbmqVcOcEbLTd3He7vr2JguscWPyasUrbOzII/b3w/YWfKbTFRMuJ3T6U+XGXTXSfkJ5R70oufpzVhUQXxFqkd/1uIAfJxjF4Di1mkNk8s/8EJrXwfYUMrNtbGAgty8nSRMGETHbf2thoQm8LKjE58jszinPmKt246pDp8/Ye+000wIdjmeTgxYoLe1ym0eR+uWWmKq3IvGRRMvCpYZs5BF9zEyfPYx5Zu3XAi7SHlU+17MvIEVNc0tWrG9TDhMQa5u2TBRZ+1PkXaR11VnNRAr/6ikMPkgW0CS+u7gflmzyEVdTrUUjYw5GGkT6i6RdBDs7VOvfMloxqsYLNQ8gzdxLIciofqbirWnAIBGQ2jRP4iDZsGy9J9XXP2XgYS6Jom5FDpO/jt3/sxc8BVktV3DogC1PoB2QrkrEic0oeNUy/RzoHXD48/ubPwgGdTzl1NmBF+7Zbnv/dLTSMPWOamX4yFmhDQ==
+https://api.netlify.com/build_hooks/6a187e5ab3287ca84c3c6396
