@@ -22740,4 +22740,6 @@ package = "@netlify/plugin-nextjs"
   base = "."
 
 
-
+[build]
+  command = "npm install && npm run build"
+  publish = "build"
