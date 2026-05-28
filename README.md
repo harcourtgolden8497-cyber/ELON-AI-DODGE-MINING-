@@ -22621,3 +22621,7 @@ next.config.js
 git add .
 git commit -m "Add full Next.js project"
 git push origin main
+
+Deploys
+→ Trigger deploy
+→ Deploy site
