@@ -1,4 +1,4 @@
-# 🚀 ELON AI DOGE MINING SAAS PLATFORM
+lql# 🚀 ELON AI DOGE MINING SAAS PLATFORM
 
 A production-ready **AI-powered SaaS dashboard platform** built with Next.js 
 
