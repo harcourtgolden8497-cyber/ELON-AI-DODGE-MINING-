@@ -22633,3 +22633,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDcjWCHpWc//Gdkqh+R7VHBVAufBm/NGEpkX2V4BWM7
 https://api.netlify.com/preview_server_hooks/6a111ad9556b7b889a9ed806
 https://api.netlify.com/build_hooks/6a1122d4966a4f9c1e641a9a
 
+# netlify.toml
+[build]
+  base = "."
+  # other settings...
