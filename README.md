@@ -2673,16 +2673,8 @@ Demote user
 `ts
 await supabase
   .from('users')
-  .update({ role: 'member' })
-  .eq('id', userId);
-`
+  .update({ role: 'member' 
 
----
-
-VI. UI FLOW (CINEMATIC, PREMIUM, OFFICIAL ELON AI DOGE MINING‑STYLE)
-
-Admin Panel Sections
-1. User Overview
    - Table of all users  
    - Role badges (gold for admin, silver for member)  
    - Created date  
@@ -3391,6 +3383,7 @@ Simulate mining
 
 
 Finance Controls
+
 
 Approve withdrawals
 
@@ -4666,7 +4659,6 @@ Mining sessions
 API abuse
 
 
-
 ---
 
 STAGE 14 — CINEMATIC HOMEPAGE
@@ -5177,7 +5169,7 @@ AI Security Engine
 
 Detect
 
-Fake mining
+Fake miningI'
 
 Multiple accounts
 
@@ -17660,7 +17652,7 @@ Configure:
 
 📱 3. MOBILE APP STACK (GLOBAL STANDARD)
 
-Use:
+Us
 
 Expo React Native
 
@@ -22609,3 +22601,8 @@ Before going public:
 
 
 ---
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
