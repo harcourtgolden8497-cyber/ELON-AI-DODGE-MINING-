@@ -22691,7 +22691,7 @@ or
 TOML
 base = "/opt/build/repo"
 [build]
-base = "."
+base
 command = "npm run build"
 publish = ".next"
 
@@ -22701,3 +22701,35 @@ package = "@netlify/plugin-nextjs"
 base = "frontend"
 command = "npm run build"
 publish = ".next"
+
+[build]
+base = "."
+command = "npm run build"
+publish = "netlify"
+
+[build]
+command = "npm run build"
+publish = "netlify"
+
+[build]
+base = "."
+command = "npm run build"
+publish = "netlify"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+[build]
+base = "."
+command = "npm run build"
+publish = "netlify"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+
+
+
+
+
+
