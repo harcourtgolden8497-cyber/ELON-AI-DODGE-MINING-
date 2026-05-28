@@ -22779,3 +22779,5 @@ publish = ".next"
 [[plugins]]
 package = "@netlify/plugin-nextjs"
 
+base = "."
+
