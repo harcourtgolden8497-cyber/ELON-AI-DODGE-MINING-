@@ -22727,9 +22727,17 @@ publish = "netlify"
 [[plugins]]
 package = "@netlify/plugin-nextjs"
 
+[build]
+  publish = "dist"
+  command = "npm run build"
 
+[build]
+  base = "frontend"
+  publish = "frontend/dist"
+  command = "npm run build"
 
-
+[build]
+  base = "."
 
 
 
