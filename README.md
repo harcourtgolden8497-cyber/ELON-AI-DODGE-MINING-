@@ -22672,3 +22672,7 @@ package = "@netlify/plugin-nextjs"
 
 [build.environment]
 NODE_VERSION = "20"
+npm install @netlify/plugin-nextjs --save-dev
+git add .
+git commit -m "Fix Netlify Next.js publish directory"
+git push
