@@ -22662,3 +22662,13 @@ publish = ".next"
 package = "@netlify/plugin-nextjs"
 
 
+[build]
+base = "."
+command = "npm run build"
+publish = ".next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+[build.environment]
+NODE_VERSION = "20"
