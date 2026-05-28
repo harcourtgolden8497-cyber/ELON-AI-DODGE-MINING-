@@ -22676,3 +22676,28 @@ npm install @netlify/plugin-nextjs --save-dev
 git add .
 git commit -m "Fix Netlify Next.js publish directory"
 git push
+
+[build]
+base = "/opt/build"
+[build]
+base = "."
+command = "npm run build"
+publish = ".next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+base = "/opt/build"
+or
+TOML
+base = "/opt/build/repo"
+[build]
+base = "."
+command = "npm run build"
+publish = ".next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+[build]
+base = "frontend"
+command = "npm run build"
+publish = ".next"
