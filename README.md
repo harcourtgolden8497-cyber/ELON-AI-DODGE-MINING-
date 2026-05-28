@@ -22757,3 +22757,25 @@ publish = ".next"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+And in the Netlify UI:
+Plain text
+Base directory:
+frontend
+package.json
+next.config.js
+app/ or pages/
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+[build]
+base = "."
+command = "npm run build"
+publish = ".next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
