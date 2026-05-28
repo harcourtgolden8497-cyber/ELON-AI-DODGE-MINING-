@@ -22625,3 +22625,6 @@ git push origin main
 Deploys
 → Trigger deploy
 → Deploy site
+
+npm install netlify-cli -g
+netlify dev
