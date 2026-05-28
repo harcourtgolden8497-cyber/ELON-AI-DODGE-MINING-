@@ -22781,3 +22781,142 @@ package = "@netlify/plugin-nextjs"
 
 base = "."
 
+
+Blueprint: Resolve Netlify Build Failure Caused by Invalid Base Directory
+
+1. Problem Summary (What’s actually breaking)
+Netlify is failing during the configuration parsing stage because:
+
+- The site’s base directory is set to /opt/build
+- That directory does not exist in your repository
+- Netlify stops before even running the build command
+
+This is a configuration‑level failure, not a code failure.
+
+---
+
+2. Root Cause
+Netlify only allows the base directory to be:
+
+- The repository root, or  
+- A real folder inside the repo (e.g., frontend, app, site, etc.)
+
+/opt/build is a system path, not a repo path.  
+Netlify interprets it as “the folder where your project lives,” and since it doesn’t exist, the build halts.
+
+---
+
+3. Master Fix Blueprint
+
+Step 1 — Identify where the incorrect base directory is set
+There are only two possible locations:
+
+A. netlify.toml
+Look for something like:
+
+`toml
+[build]
+  base = "/opt/build"
+`
+
+or
+
+`toml
+base = "/opt/build"
+`
+
+B. Netlify UI
+Navigate to:
+
+Site settings → Build & deploy → Build settings → Base directory
+
+If it shows /opt/build, that’s the culprit.
+
+---
+
+Step 2 — Correct the base directory
+
+Option 1 — Use the repo root (most common fix)
+Remove the base line entirely from netlify.toml:
+
+`toml
+[build]
+
+base removed
+  publish = "dist"
+  command = "npm run build"
+`
+
+And in the UI, clear the Base directory field so it’s blank.
+
+---
+
+Option 2 — Set it to a real folder
+If your project lives in a subfolder, set it to that folder:
+
+`toml
+[build]
+  base = "frontend"
+  publish = "frontend/dist"
+  command = "npm run build"
+`
+
+Or in the UI, set:
+
+Base directory → frontend
+
+---
+
+Step 3 — Trigger a new deploy
+After updating the config:
+
+- Commit the change (if using netlify.toml)
+- Or save the UI change
+- Then click Deploy site
+
+Netlify will now correctly locate the project and run the build.
+
+---
+
+4. Verification Blueprint (Agent Checklist)
+
+Agent should confirm:
+- [ ] The repo contains the folder referenced in base
+- [ ] netlify.toml and UI settings do not conflict
+- [ ] The publish directory is correct relative to the new base
+- [ ] The build command runs successfully when executed locally from the base directory
+
+Agent should test:
+Run locally:
+
+`bash
+cd <base-directory>
+npm run build
+`
+
+If this works locally, Netlify will accept it.
+
+---
+
+5. Optional Hardening (Prevents future failures)
+
+Add a validation script
+Create a script that checks for invalid paths before deployment:
+
+`bash
+if [ ! -d "$BASE_DIR" ]; then
+  echo "Error: Base directory '$BASE_DIR' does not exist."
+  exit 1
+fi
+`
+
+Document the project structure
+Add a README.md section:
+
+`
+Netlify expects the project root to be: <folder>
+Do not set base = "/opt/build"
+`
+
+---
+
