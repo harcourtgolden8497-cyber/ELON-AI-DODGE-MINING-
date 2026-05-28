@@ -22637,3 +22637,28 @@ https://api.netlify.com/build_hooks/6a1122d4966a4f9c1e641a9a
 [build]
   base = "."
   # other settings...
+Fix netlify.toml (if present)
+Inside your repo, check for:
+Plain text
+netlify.toml
+If you see:
+TOML
+base = "/opt/build"
+replace it with:
+TOML
+[build]
+base = "."
+command = "npm run build"
+publish = ".next"
+Or remove the base line entirely.
+Correct Next.js Production Example
+For your Next.js SaaS mining platform, use:
+TOML
+[build]
+command = "npm run build"
+publish = ".next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+
