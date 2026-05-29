@@ -1,4 +1,4 @@
-lql# 🚀 ELON AI DOGE MINING SAAS PLATFORM
+# 🚀 ELON AI DOGE MINING SAAS PLATFORM
 
 A production-ready **AI-powered SaaS dashboard platform** built with Next.js 
 
@@ -23084,3 +23084,5 @@ Netlify will now correctly locate the project and proceed with the build.
 https://api.netlify.com/preview_server_hooks/6a187ea33fab81a8f0fdc111
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4Q4cuVQmJ044A4OsoGIZahUliBXg+JZmfx8RODNR9Q6Bb9Tu286yJWNzMcMX6oz0lAbqNLU8aei9Gi5XQ3B4Dbj+8s9qxp34zqrunhL0dDiGWoVSRt9jyI2vnQC5TTopBcxGy2f0hivTnRvqZWBuL6RcJYt84sADrOzLpZ5E7jLg1JVq6Hw1J9uqT5Fi1ot/KuRxBv2MmTzH0tbmqVcOcEbLTd3He7vr2JguscWPyasUrbOzII/b3w/YWfKbTFRMuJ3T6U+XGXTXSfkJ5R70oufpzVhUQXxFqkd/1uIAfJxjF4Di1mkNk8s/8EJrXwfYUMrNtbGAgty8nSRMGETHbf2thoQm8LKjE58jszinPmKt246pDp8/Ye+000wIdjmeTgxYoLe1ym0eR+uWWmKq3IvGRRMvCpYZs5BF9zEyfPYx5Zu3XAi7SHlU+17MvIEVNc0tWrG9TDhMQa5u2TBRZ+1PkXaR11VnNRAr/6ikMPkgW0CS+u7gflmzyEVdTrUUjYw5GGkT6i6RdBDs7VOvfMloxqsYLNQ8gzdxLIciofqbirWnAIBGQ2jRP4iDZsGy9J9XXP2XgYS6Jom5FDpO/jt3/sxc8BVktV3DogC1PoB2QrkrEic0oeNUy/RzoHXD48/ubPwgGdTzl1NmBF+7Zbnv/dLTSMPWOamX4yFmhDQ==
 https://api.netlify.com/build_hooks/6a187e5ab3287ca84c3c6396
+[build]
+  publish = ".next"
