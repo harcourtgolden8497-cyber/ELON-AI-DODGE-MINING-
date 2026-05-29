@@ -23114,3 +23114,10 @@ body: JSON.stringify({ message: `Value of MY_IMPORTANT_VARIABLE is ${value}.`}),
 };
 
 export { handler };
+[functions]
+
+  # Flags "package-1" as an external node module for all functions.
+  external_node_modules = ["package-1"]
+
+  # Includes all Markdown files inside the "files/" directory.
+  included_files = ["files/*.md"]
