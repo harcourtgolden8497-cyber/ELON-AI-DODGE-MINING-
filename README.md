@@ -23086,4 +23086,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4Q4cuVQmJ044A4OsoGIZahUliBXg+JZmfx8RODNR9
 https://api.netlify.com/build_hooks/6a187e5ab3287ca84c3c6396
 [build]
   publish = ".next"
-
+[build]
+# Remove the incorrect base setting or replace it with a relative path
+# base = "/opt/build"
+command = "your-build-command"
+publish = "dist"
