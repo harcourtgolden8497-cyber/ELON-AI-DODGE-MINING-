@@ -23091,3 +23091,5 @@ https://api.netlify.com/build_hooks/6a187e5ab3287ca84c3c6396
 # base = "/opt/build"
 command = "your-build-command"
 publish = "dist"
+[build]
+base = "."
