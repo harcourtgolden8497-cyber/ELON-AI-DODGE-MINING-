@@ -23121,3 +23121,6 @@ export { handler };
 
   # Includes all Markdown files inside the "files/" directory.
   included_files = ["files/*.md"]
+
+tsc hello/function.ts --outfile netlify/functions/hello.js
+npm run test:functions && npm run build
