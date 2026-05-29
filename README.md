@@ -23150,3 +23150,226 @@ NODE_VERSION = 20
 git add .
 git commit -m "Fix Node version for Netlify"
 git push origin main
+1. Configure MCP
+Set up your MCP client.
+Details:
+Add the MCP server to your GitHub Copilot config using the command line:
+Alternatively, add this configuration to ~/.copilot/mcp-config.json:
+After configuring the MCP server, authenticate by running:
+Follow the on-screen instructions to complete the authentication flow.
+Need help?View GitHub Copilot docs
+Code:
+File: Code
+```
+copilot mcp add --transport http supabase "https://mcp.supabase.com/mcp?project_ref=ulafajakyuguntbytdui"
+```
+
+File: Code
+```
+1{
+2  "mcpServers": {
+3    "supabase": {
+4      "type": "http",
+5      "url": "https://mcp.supabase.com/mcp?project_ref=ulafajakyuguntbytdui"
+6    }
+7  }
+8}
+```
+
+File: Code
+```
+copilot -i /mcp
+```
+
+2. Install Agent Skills (Optional)
+Agent Skills give AI coding tools ready-made instructions, scripts, and resources for working with Supabase more accurately and efficiently.
+Details:
+npx skills add supabase/agent-skills
+Code:
+File: Code
+```
+npx skills add supabase/agent-skills
+```
+1. Configure MCP
+Set up your MCP client.
+Details:
+Add the MCP server to your GitHub Copilot config using the command line:
+Alternatively, add this configuration to ~/.copilot/mcp-config.json:
+After configuring the MCP server, authenticate by running:
+Follow the on-screen instructions to complete the authentication flow.
+Need help?View GitHub Copilot docs
+Code:
+File: Code
+```
+copilot mcp add --transport http supabase "https://mcp.supabase.com/mcp?project_ref=ulafajakyuguntbytdui&read_only=true"
+```
+
+File: Code
+```
+1{
+2  "mcpServers": {
+3    "supabase": {
+4      "type": "http",
+5      "url": "https://mcp.supabase.com/mcp?project_ref=ulafajakyuguntbytdui&read_only=true"
+6    }
+7  }
+8}
+```
+
+File: Code
+```
+copilot -i /mcp
+```
+
+2. Install Agent Skills (Optional)
+Agent Skills give AI coding tools ready-made instructions, scripts, and resources for working with Supabase more accurately and efficiently.
+Details:
+npx skills add supabase/agent-skills
+Code:
+File: Code
+```
+npx skills add supabase/agent-skills
+```
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18"
+import { supabase } from '../lib/supabaseClient'
+
+const { data, error } = await supabase
+  .from('users')
+  .select('*')
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+)
+
+export const handler = async () => {
+  const { data, error } = await supabase.from('users').select('*')
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ data, error }),
+  }
+}
+npx create-next-app@latest saas-auth
+cd saas-auth
+npm install @supabase/supabase-js
+import { createClient } from '@supabase/supabase-js'
+
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+)
+import { useState } from 'react'
+import { supabase } from '../lib/supabaseClient'
+import { useRouter } from 'next/router'
+
+export default function Auth() {
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  // SIGN UP
+  const signUp = async () => {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+    if (!error) alert('Check your email for confirmation!')
+  }
+
+  // LOGIN
+  const signIn = async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (!error) router.push('/dashboard')
+  }
+
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>Login / Signup</h1>
+
+      <input
+        placeholder="email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <br />
+      <input
+        placeholder="password"
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={signIn}>Login</button>
+      <button onClick={signUp}>Sign Up</button>
+    </div>
+  )
+}
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabaseClient'
+import { useRouter } from 'next/router'
+
+export default function Dashboard() {
+  const router = useRouter()
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser()
+
+      if (!data.user) {
+        router.push('/auth')
+      } else {
+        setUser(data.user)
+      }
+    }
+
+    getUser()
+  }, [])
+
+  const logout = async () => {
+    await supabase.auth.signOut()
+    router.push('/auth')
+  }
+
+  if (!user) return <p>Loading...</p>
+
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>Dashboard</h1>
+      <p>Welcome: {user.email}</p>
+
+      <button onClick={logout}>Logout</button>
+    </div>
+  )
+}
+import { useEffect } from 'react'
+import { supabase } from '../lib/supabaseClient'
+
+export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      console.log('Session:', data.session)
+    })
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log(event, session)
+      }
+    )
+
+    return () => listener.subscription.unsubscribe()
+  }, [])
+
+  return <Component {...pageProps} />
+}
