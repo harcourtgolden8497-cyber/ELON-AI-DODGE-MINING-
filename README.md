@@ -23131,3 +23131,22 @@ https://api.netlify.com/build_hooks/5c23354f454e1350f8543e78?trigger_branch=test
 package = "netlify-plugin-check-output-for-puppy-references"
   [plugins.inputs]
   breeds = ["pomeranian", "chihuahua", "bulldog"]
+[build]
+  base = "."
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+NODE_VERSION = 20
+{
+  "engines": {
+    "node": "20.x"
+  }
+}
+git add .
+git commit -m "Fix Node version for Netlify"
+git push origin main
