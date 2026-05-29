@@ -23093,3 +23093,24 @@ command = "your-build-command"
 publish = "dist"
 [build]
 base = "."
+exports.handler = async function (event, context) {
+  const value = process.env.MY_IMPORTANT_VARIABLE;
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: `Value of MY_IMPORTANT_VARIABLE is ${value}.` }),
+  };
+};
+import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+
+const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+
+const value = process.env.MY_IMPORTANT_VARIABLE;
+
+return {
+statusCode: 200,
+body: JSON.stringify({ message: `Value of MY_IMPORTANT_VARIABLE is ${value}.`}),
+};
+};
+
+export { handler };
