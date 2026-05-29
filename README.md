@@ -23125,3 +23125,4 @@ export { handler };
 tsc hello/function.ts --outfile netlify/functions/hello.js
 npm run test:functions && npm run build
 curl -X POST -d '{}' https://api.netlify.com/build_hooks/5c23354f454e1350f8543e78
+https://api.netlify.com/build_hooks/5c23354f454e1350f8543e78?trigger_branch=testing&trigger_title=triggered+by+This+Awesome+Service&clear_cache=true
