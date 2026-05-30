@@ -23373,3 +23373,147 @@ export default function App({ Component, pageProps }) {
 
   return <Component {...pageProps} />
 }
+npx create-next-app saas-app
+cd saas-app
+npm install @supabase/supabase-js
+import { createClient } from '@supabase/supabase-js'
+
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+)
+
+import { useState } from 'react'
+import { supabase } from '../lib/supabase'
+import { useRouter } from 'next/router'
+
+export default function Auth() {
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const signUp = async () => {
+    await supabase.auth.signUp({ email, password })
+    alert('Check email to confirm account')
+  }
+
+  const signIn = async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+
+    if (!error) router.push('/dashboard')
+  }
+
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>SaaS Login</h1>
+
+      <input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
+
+      <br /><br />
+
+      <button onClick={signIn}>Login</button>
+      <button onClick={signUp}>Signup</button>
+    </div>
+  )
+}
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabase'
+import { useRouter } from 'next/router'
+
+export default function Dashboard() {
+  const router = useRouter()
+  const [user, setUser] = useState(null)
+  const [profile, setProfile] = useState(null)
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const { data } = await supabase.auth.getUser()
+
+      if (!data.user) {
+        router.push('/auth')
+        return
+      }
+
+      setUser(data.user)
+
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', data.user.id)
+        .single()
+
+      setProfile(profileData)
+    }
+
+    loadUser()
+  }, [])
+
+  const logout = async () => {
+    await supabase.auth.signOut()
+    router.push('/auth')
+  }
+
+  if (!user || !profile) return <p>Loading...</p>
+
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>Dashboard</h1>
+
+      <p>Email: {user.email}</p>
+      <p>Role: {profile.role}</p>
+
+      {profile.role === 'admin' && (
+        <div style={{ background: '#eee', padding: 10 }}>
+          🔥 Admin Panel Access
+        </div>
+      )}
+
+      {profile.role === 'pro' && (
+        <div style={{ background: '#d4f4dd', padding: 10 }}>
+          💎 Pro Features Unlocked
+        </div>
+      )}
+
+      <button onClick={logout}>Logout</button>
+    </div>
+  )
+}
+import { useEffect } from 'react'
+import { supabase } from '../lib/supabase'
+
+export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    supabase.auth.getSession()
+
+    const { data } = supabase.auth.onAuthStateChange(() => {
+      // keeps session alive
+    })
+
+    return () => data.subscription.unsubscribe()
+  }, [])
+
+  return <Component {...pageProps} />
+}
+ROLE SYSTEM (HOW IT WORKS)
+Role
+Access
+user
+basic dashboard
+pro
+premium features
+admin
+admin panel
+
+http://localhost:3000/auth
+http://localhost:3000/dashboard
+https://elonaidogemining hub.live/auth
+https://elonaidogemining hub.live/dashboard
+
+http://localhost:3000/*
+https://elonaidogemining hub.live/*
+
+
